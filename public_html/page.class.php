@@ -12,9 +12,7 @@ class page{
 	}
 
 	public function printPost($id) {
-		$mine_hilsner = array();
-		$i=0;
-		/* Hent ut info om hver hilsen, lagre dette i assosiativ tabell og overfør til Smarty  */
+		/* Hent ut post med $id og overf¿r den til Smarty  */
 		foreach ($this->xml->pages->page as $page) {
 			if ($id == $page->id) {
 				$this->smarty->assign('title', utf8_decode($page->title));
@@ -25,6 +23,18 @@ class page{
 		}
 		$this->smarty->display('page.tpl');
 	}
+	
+	public function getPagesForMenu(){
+		$pages = array();
+		
+		foreach ($this->xml->pages->page as $page) {
+			$pages[] = array('title' => $page->title, 'id' => $page->id);
+		}
+		return $pages;
+		
+		
+	}
+	
 }
 
 ?>

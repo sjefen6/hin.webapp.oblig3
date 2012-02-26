@@ -18,7 +18,11 @@ $smarty->cache_lifetime = 120;
 $menu = new menu();
 
 $smarty->assign("title","Dette er overskriften",true);
+$smarty->assign("subtitle","Dette er overskriften",true);
+
 $smarty->assign('menu',$menu->getMenuArray());
+
+
 
 $smarty->display('index.tpl');
 ?>

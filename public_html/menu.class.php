@@ -5,6 +5,10 @@ class menu{
 	function __construct() {
 		$menuItems = array();
 	}
+	
+	function setMenuItem($url, $name) {
+		$menuItems[] = new menuItem($url, $name);
+	}
 
 	function getMenuArray() {
 		$tempArray = array();

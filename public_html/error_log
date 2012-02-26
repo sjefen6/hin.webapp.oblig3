@@ -105,3 +105,15 @@ Stack trace:
 [26-Feb-2012 15:56:14] PHP Notice:  Trying to get property of non-object in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 42
 [26-Feb-2012 15:56:14] PHP Notice:  Undefined index:  articles in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 59
 [26-Feb-2012 15:56:14] PHP Notice:  Trying to get property of non-object in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 59
+[26-Feb-2012 18:00:33] PHP Notice:  Undefined variable: menuItems in /home/goldcdvi/public_html_kc/public_html/menu.class.php on line 12
+[26-Feb-2012 18:00:33] PHP Warning:  Invalid argument supplied for foreach() in /home/goldcdvi/public_html_kc/public_html/menu.class.php on line 12
+[26-Feb-2012 18:00:33] PHP Notice:  Undefined index:  subtitle in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 42
+[26-Feb-2012 18:00:33] PHP Notice:  Trying to get property of non-object in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 42
+[26-Feb-2012 18:00:33] PHP Notice:  Undefined index:  articles in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 59
+[26-Feb-2012 18:00:33] PHP Notice:  Trying to get property of non-object in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 59
+[26-Feb-2012 18:00:34] PHP Notice:  Undefined variable: menuItems in /home/goldcdvi/public_html_kc/public_html/menu.class.php on line 12
+[26-Feb-2012 18:00:34] PHP Warning:  Invalid argument supplied for foreach() in /home/goldcdvi/public_html_kc/public_html/menu.class.php on line 12
+[26-Feb-2012 18:00:34] PHP Notice:  Undefined index:  subtitle in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 42
+[26-Feb-2012 18:00:34] PHP Notice:  Trying to get property of non-object in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 42
+[26-Feb-2012 18:00:34] PHP Notice:  Undefined index:  articles in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 59
+[26-Feb-2012 18:00:34] PHP Notice:  Trying to get property of non-object in /home/goldcdvi/public_html_kc/public_html/templates_c/c0360d049dff10f364dfc53ba2cc3958abf6ee6d.file.index.tpl.php on line 59
