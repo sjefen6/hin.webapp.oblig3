@@ -5,18 +5,22 @@ class menu{
 	function __construct() {
 		$menuItems = array();
 	}
-	
-	function setMenuItem($url, $name) {
-		$menuItems[] = new menuItem($url, $name);
+
+	function addItem(menuItem $item) {
+		$this->menuItems[] = $item;
 	}
+
+// 	function addArray(array $items) {
+// 		array_push($this->menuItems, $items)
+// 	}
 
 	function getMenuArray() {
 		$tempArray = array();
-		
-		foreach ($menuItems as $menuItem){
+
+		foreach ($this->menuItems as $menuItem){
 			$tempArray[] = $menuItem->getAsArray();
 		}
-		
+
 		return $tempArray;
 	}
 }
@@ -27,7 +31,7 @@ class menuItem{
 
 	function __construct($url, $name) {
 		$this->name = $name;
-		$this->$url = $url;
+		$this->url = $url;
 	}
 
 	function getName() {
@@ -39,7 +43,7 @@ class menuItem{
 	}
 
 	function getAsArray(){
-		return array("name" => $name);
+		return array("name" => $this->name, "url" => $this->url);
 	}
 }
 

@@ -2,13 +2,15 @@
 <blogposts>
 	<title>Blogg</title>
 	<post>
+		<id>first2</id>
 		<title>First!</title>
 		<time>1328973890</time>
 		<description>
-			<![CDATA[FIRST!!!<br> Edit: Damn it, only 1 second of.]]>
+			<![CDATA[FIRST!!!<br> Edit: Damn it, only 1 second off.]]>
 		</description>
 	</post>
 	<post>
+		<id>first</id>
 		<title>First!</title>
 		<time>1328973889</time>
 		<description>
