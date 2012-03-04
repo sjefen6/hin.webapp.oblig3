@@ -1131,3 +1131,6 @@ Stack trace:
 [29-Feb-2012 10:50:10] PHP Fatal error:  Call to a member function assign() on a non-object in /home/goldcdvi/public_html_kc/public_html/index.php on line 46
 [29-Feb-2012 10:51:41] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/goldcdvi/public_html_kc/public_html/index.php on line 37
 [29-Feb-2012 10:51:41] PHP Parse error:  syntax error, unexpected T_VARIABLE in /home/goldcdvi/public_html_kc/public_html/index.php on line 37
+[04-Mar-2012 18:20:34] PHP Parse error:  syntax error, unexpected T_RETURN, expecting ',' or ';' in /home/goldcdvi/public_html_kc/public_html/postHandler.class.php on line 57
+[04-Mar-2012 18:20:34] PHP Parse error:  syntax error, unexpected T_RETURN, expecting ',' or ';' in /home/goldcdvi/public_html_kc/public_html/postHandler.class.php on line 57
+[04-Mar-2012 18:58:39] PHP Fatal error:  Call to undefined method pageHandler::getPost() in /home/goldcdvi/public_html_kc/public_html/index.php on line 55

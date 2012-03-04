@@ -1,4 +1,4 @@
-<?php /* Smarty version Smarty-3.1.8, created on 2012-02-29 10:52:02
+<?php /* Smarty version Smarty-3.1.8, created on 2012-03-04 18:56:03
          compiled from "./templates/index.tpl" */ ?>
 <?php /*%%SmartyHeaderCode:19281955084f4a34e815a745-56611737%%*/if(!defined('SMARTY_DIR')) exit('no direct access allowed');
 $_valid = $_smarty_tpl->decodeProperties(array (
@@ -7,7 +7,7 @@ $_valid = $_smarty_tpl->decodeProperties(array (
     'c0360d049dff10f364dfc53ba2cc3958abf6ee6d' => 
     array (
       0 => './templates/index.tpl',
-      1 => 1330509121,
+      1 => 1330883762,
       2 => 'file',
     ),
   ),
@@ -65,10 +65,11 @@ foreach ($_from as $_smarty_tpl->tpl_vars['article']->key => $_smarty_tpl->tpl_v
 $_smarty_tpl->tpl_vars['article']->_loop = true;
 ?>
 		<article>
-			<h1><?php echo $_smarty_tpl->tpl_vars['article']->value['title'];?>
-</h1>
+			<a href="?post=<?php echo $_smarty_tpl->tpl_vars['article']->value['id'];?>
+"><h1><?php echo $_smarty_tpl->tpl_vars['article']->value['title'];?>
+</h1></a>
 			<section class="articleContent">
-			<?php echo $_smarty_tpl->tpl_vars['article']->value['content'];?>
+			<?php echo $_smarty_tpl->tpl_vars['article']->value['desc'];?>
 
 			</section>
 		</article>
@@ -80,7 +81,7 @@ $_smarty_tpl->tpl_vars['article']->_loop = true;
 			<h1><?php echo $_smarty_tpl->tpl_vars['post']->value['title'];?>
 </h1>
 			<section class="articleContent">
-			<?php echo $_smarty_tpl->tpl_vars['post']->value['content'];?>
+			<?php echo $_smarty_tpl->tpl_vars['post']->value['desc'];?>
 
 			</section>
 		</article>

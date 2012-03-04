@@ -19,9 +19,9 @@
 	<section id="articles">
 		{foreach from=$articles item=article}
 		<article>
-			<h1>{$article.title}</h1>
+			<a href="?post={$article.id}"><h1>{$article.title}</h1></a>
 			<section class="articleContent">
-			{$article.content}
+			{$article.desc}
 			</section>
 		</article>
 		{/foreach}
@@ -31,7 +31,7 @@
 		<article>
 			<h1>{$post.title}</h1>
 			<section class="articleContent">
-			{$post.content}
+			{$post.desc}
 			</section>
 		</article>
 	</section>

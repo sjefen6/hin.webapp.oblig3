@@ -15,18 +15,45 @@ class postHandler{
 		}
 	}
 
-		public function getPost($id) {
-			/* Hent ut post med $id og overf¿r den til Smarty  */
-			foreach ($this->postArray as $post) {
-				if ($id == $post->getId()) {
-					$postArray = array('title' => $post->getTitle(),
+	public function getPost($id){
+		/* Hent ut post med $id og overf¿r den til Smarty  */
+		foreach ($this->postArray as $post) {
+			if ($id == $post->getId()) {
+				$postArray = array('title' => $post->getTitle(),
 					'time' => date("r", $post->getTime()),
 					'desc' => $post->getDesc());
-					return $postArray;
-				}
+				return $postArray;
 			}
-			return false;	
 		}
+		return false;
+	}
+
+	public function getPosts($from, $to){
+		/* Hent ut post med $id og overf¿r den til Smarty  */
+		$postArray = array();
+
+		if ($from > $to){
+			return false;
+		}
+		$counter = 0;
+		foreach ($this->postArray as $post) {
+			if ($counter < $from){
+				// 				We are not yet at $from
+				;
+			} else if ($counter > $to) {
+				// 				We have passed $to
+				return $postArray;
+			} else {
+				$postArray[] = array('id' => $post->getId(),
+						'title' => $post->getTitle(),
+						'time' => date("r", $post->getTime()),
+						'desc' => $post->getDesc());
+			}
+			$counter++;
+		}
+		// There are no more posts available
+		return $postArray;
+	}
 }
 
 class post{
@@ -45,21 +72,17 @@ class post{
 	public function getId(){
 		return $this->id;
 	}
-	
+
 	public function getTitle(){
 		return $this->title;
 	}
-	
+
 	public function getTime(){
 		return $this->time;
 	}
-	
+
 	public function getDesc(){
 		return $this->description;
-	}
-	
-	public function getMenuItem(){
-		return new menuItem("?post=" . $this->id, $this->title);
 	}
 }
 ?>
