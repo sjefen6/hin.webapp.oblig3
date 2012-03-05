@@ -14,6 +14,20 @@
 {foreach from=$menu item=i}
 		<a href="{$i.url}">{$i.name}</a>
 {/foreach}
+{if $failed}
+	<span>Loggon failed!</span>
+{/if}
+{if $signedIn}
+	<span>You are signed in</span>
+{else}
+	<form action="?login=in" method="post">
+		<label for="userId">Un:</label>
+		<input type="text" name="userId" />
+		<label for="password">Pw:</label>
+		<input type="password" name="password" />
+		<input type="submit" value="Sign In" />
+	</form>
+{/if}
 	</nav>
 {if $mode eq 'bloglist'}
 	<section id="articles">

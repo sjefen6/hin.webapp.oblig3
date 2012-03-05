@@ -8,6 +8,7 @@ require('libs/Smarty.class.php');
 require('menu.class.php');
 require('pageHandler.class.php');
 require('postHandler.class.php');
+require('userHandler.class.php');
 
 $admin = false;
 
@@ -43,6 +44,26 @@ $menu = $pages->addToMenu($menu);
 
 $smarty->assign('menu',$menu->getMenuArray());
 
+/*
+ * Login subutine
+ */
+$users = new userHandler();
+$users->readFile("../users.xml");
+if (isset($_GET["login"])){
+	if ($_GET["login"] == "in"){
+		$temp = $users->verifyLogin($_POST["userId"], $_POST["password"]);
+		$smarty->assign("signedIn", $temp);
+		if (!$temp){
+			$smarty->assign("failed", true);
+		}
+	}
+}
+
+
+
+/*
+ * Main content switch
+ */
 if (isset($_GET["page"])) {
 	$temp = $pages->getPage($_GET["page"]);
 	if ($temp != false){
