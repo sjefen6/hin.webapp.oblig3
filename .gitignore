@@ -1,4 +1,4 @@
 .settings
 cgi-bin
-templates_c
-error_log
+public_html/templates_c*
+public_html/error_log
