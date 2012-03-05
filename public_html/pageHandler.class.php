@@ -2,13 +2,16 @@
 
 class pageHandler{
 	private $pageArray;
+	private $filename;
 
-	function __construct() {
+	function __construct($filename) {
 		$this->pageArray = array();
+		$this -> filename = $filename;
+		$this -> readFile();
 	}
 
-	public function readFile($filename){
-		$xml = simplexml_load_file($filename);
+	private function readFile(){
+		$xml = simplexml_load_file($this -> filename);
 
 		foreach ($xml->page as $page) {
 			$this->pageArray[] = new page(utf8_decode($page->id), utf8_decode($page->title), utf8_decode($page->time), utf8_decode($page->description));
@@ -33,6 +36,30 @@ class pageHandler{
 			$menu->addItem($page->getMenuItem());
 		}
 		return $menu;
+	}
+	
+	public function addPage($id, $title, $desc){
+		$this->pageArray[] = new page($id, $title, time(), $desc);
+		$this->save();
+	}
+	
+	public function save() {
+	
+		$xml_ny = "<pages>";
+		foreach ($this->pageArray as $page) {
+			$xml_ny .=  "<page>\n".
+		                    "<id>" . utf8_encode($page->getId()). "</id>\n" .
+		                    "<title>" .utf8_encode($page->getTitle()). "</title>\n" .
+		                    "<time>" .utf8_encode($page->getTime()). "</time>\n" .
+		                    "<description><![CDATA[" .utf8_encode($page->getDesc()). "]]></description>\n" . 
+		                    "</page>\n";
+		}
+		$xml_ny .= "</pages>";
+	
+		$xml = simplexml_load_string($xml_ny);
+	
+		// Lagre endrede XML data til fil, skrivekasess til fil nødvendig for apache web tjener
+		file_put_contents($this->filename,$xml->asXML());
 	}
 }
 

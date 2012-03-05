@@ -1,20 +1,30 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<blogposts>
-	<title>Blogg</title>
-	<post>
-		<id>first2</id>
-		<title>First!</title>
-		<time>1328973890</time>
-		<description>
-			<![CDATA[FIRST!!!<br> Edit: Damn it, only 1 second off.]]>
-		</description>
-	</post>
-	<post>
-		<id>first</id>
-		<title>First!</title>
-		<time>1328973889</time>
-		<description>
-			<![CDATA[OMG, this is FIRST!!!]]>
-		</description>
-	</post>
+<?xml version="1.0"?>
+<blogposts><post>
+<id>sort</id>
+<title>Sorting</title>
+<time>1330971426</time>
+<description><![CDATA[Sort it damnitt]]></description>
+</post>
+<post>
+<id>test</id>
+<title>Test</title>
+<time>1330966862</time>
+<description><![CDATA[Dette er en test, lol!]]></description>
+</post>
+<post>
+<id>first2</id>
+<title>First!</title>
+<time>1328973890</time>
+<description><![CDATA[
+			FIRST!!!<br> Edit: Damn it, only 1 second off.
+		]]></description>
+</post>
+<post>
+<id>first</id>
+<title>First!</title>
+<time>1328973889</time>
+<description><![CDATA[
+			OMG, this is FIRST!!!
+		]]></description>
+</post>
 </blogposts>

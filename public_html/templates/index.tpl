@@ -16,9 +16,8 @@
 {/foreach}
 {if $failed}
 	<span>Loggon failed!</span>
-{/if}
-{if $signedIn}
-	<span>You are signed in</span>
+{elseif $signedIn}
+	<span>You are <a href="?login=out" alt="Sign Out">signed in</a></span>
 {else}
 	<form action="?login=in" method="post">
 		<label for="userId">Un:</label>
@@ -29,6 +28,14 @@
 	</form>
 {/if}
 	</nav>
+{if $signedIn}
+	<nav>
+		<a href="?admin=addPost">Add Post</a>
+		<a href="?admin=addPage">Add Page</a>
+	</nav>
+{/if}
+	
+	
 {if $mode eq 'bloglist'}
 	<section id="articles">
 		{foreach from=$articles item=article}
@@ -58,6 +65,50 @@
 			</section>
 		</article>
 	</section>
+{elseif $mode eq 'addPost'}
+<section id="articles">
+	<article>
+	<h1>Add Post</h1>
+	<form action="?admin=addPost" method="post">
+		<label for="title">Title:</label>
+		<input type="text" name="title" required="required" /><br>
+		<label for="id">Id:</label>
+		<input type="text" name="id" required="required" /><br>
+		<label for="desc">Content:</label><br>
+		<textarea rows="30" cols="100" name="desc" required="required" ></textarea><br>
+		<input type="submit" value="Add Post" />
+	</form>
+	</article>
+</section>
+{elseif $mode eq 'addPage'}
+<section id="articles">
+	<article>
+	<h1>Add Page</h1>
+	<form action="?admin=addPage" method="post">
+		<label for="title">Title:</label>
+		<input type="text" name="title" required="required" /><br>
+		<label for="id">Id:</label>
+		<input type="text" name="id" required="required" /><br>
+		<label for="desc">Content:</label><br>
+		<textarea rows="30" cols="100" name="desc" required="required" ></textarea><br>
+		<input type="submit" value="Add Page" />
+	</form>
+	</article>
+</section>
+{elseif $mode eq 'added'}
+<section id="articles">
+	<article>
+	<h1>Added</h1>
+	<p>It was added to the database</p>
+	</article>
+</section>
+{elseif $mode eq 'notAdded'}
+<section id="articles">
+	<article>
+	<h1>Added</h1>
+	<p>It was added to the database</p>
+	</article>
+</section>
 {else}
 	<section id="articles">
 		<article>

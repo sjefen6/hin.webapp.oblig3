@@ -10,14 +10,12 @@ require('pageHandler.class.php');
 require('postHandler.class.php');
 require('userHandler.class.php');
 
-$admin = false;
-
 $smarty = new Smarty;
 
 // $smarty->force_compile = true;
 // $smarty->debugging = true;
 $smarty->caching = false;
-$smarty->cache_lifetime = 120;
+//$smarty->cache_lifetime = 120;
 $smarty->assign("mode","default");
 $smarty->assign("admin",$admin);
 
@@ -36,34 +34,38 @@ $menu->addItem(new menuItem("/", "Home"));
 /*
  * Les inn alle sidene slik at vi kan generere menyen
 */
-$posts = new postHandler();
-$posts->readFile("../blogg.xml");
-$pages = new pageHandler();
-$pages->readFile("../pages.xml");
+$posts = new postHandler("../blogg.xml");
+$pages = new pageHandler("../pages.xml");
 $menu = $pages->addToMenu($menu);
 
 $smarty->assign('menu',$menu->getMenuArray());
 
 /*
  * Login subutine
- */
-$users = new userHandler();
-$users->readFile("../users.xml");
-if (isset($_GET["login"])){
-	if ($_GET["login"] == "in"){
-		$temp = $users->verifyLogin($_POST["userId"], $_POST["password"]);
-		$smarty->assign("signedIn", $temp);
-		if (!$temp){
-			$smarty->assign("failed", true);
-		}
-	}
+*/
+$admin = false;
+$users = new userHandler("../users.xml");
+
+if ($users -> verifySession()){
+	$admin = true;
 }
 
-
+if (isset($_GET["login"])){
+	if ($_GET["login"] == "in"){
+		$admin = $users->verifyLogin($_POST["userId"], $_POST["password"]);
+		if (!$admin){
+			$smarty->assign("failed", true);
+		}
+	} else {
+		$users -> logout();
+		$admin = false;
+	}
+}
+$smarty->assign("signedIn", $admin);
 
 /*
  * Main content switch
- */
+*/
 if (isset($_GET["page"])) {
 	$temp = $pages->getPage($_GET["page"]);
 	if ($temp != false){
@@ -77,6 +79,30 @@ if (isset($_GET["page"])) {
 	if ($temp != false){
 		$smarty->assign("mode","post");
 		$smarty->assign("post", $temp);
+	} else {
+		header("Status: 404 Not Found");
+	}
+} else if (isset($_GET["admin"])) {
+	if ($_GET["admin"] == "addPage" && $admin){
+		if (isset($_POST["title"])){
+			if ($pages->addPage($_POST["id"],$_POST["title"],$_POST["desc"])){
+				$smarty->assign("mode","added");
+			} else {
+				$smarty->assign("mode","notAdded");
+			}
+		} else {
+			$smarty->assign("mode","addPage");
+		}
+	} else if ($_GET["admin"] == "addPost" && $admin){
+		if (isset($_POST["title"])){
+			if ($posts->addPost($_POST["id"],$_POST["title"],$_POST["desc"])){
+				$smarty->assign("mode","added");
+			} else {
+				$smarty->assign("mode","notAdded");
+			}
+		} else {
+			$smarty->assign("mode","addPost");
+		}
 	} else {
 		header("Status: 404 Not Found");
 	}

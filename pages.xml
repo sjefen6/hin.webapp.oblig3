@@ -1,11 +1,16 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<pages>
-	<page>
-		<id>about-me</id>
-		<title>About Me</title>
-		<time>1328973889</time>
-		<description>
-			<![CDATA[My name is Vegard, and my real website is at <a href="http://www.sjefen6.no" target="_blank">sjefen6.no</a>.]]>
-		</description>
-	</page>
+<?xml version="1.0"?>
+<pages><page>
+<id>about-me</id>
+<title>About Me</title>
+<time>1328973889</time>
+<description><![CDATA[
+			My name is Vegard, and my real website is at <a href="http://www.sjefen6.no" target="_blank">sjefen6.no</a>.
+		]]></description>
+</page>
+<page>
+<id>lol</id>
+<title>LOL</title>
+<time>1330971893</time>
+<description><![CDATA[lol]]></description>
+</page>
 </pages>

@@ -2,13 +2,16 @@
 
 class userHandler {
 	private $userArray;
+	private $filename;
 
-	function __construct() {
+	function __construct($filename) {
 		$this -> userArray = array();
+		$this -> filename = $filename;
+		$this -> readFile();
 	}
 
-	public function readFile($filename) {
-		$xml = simplexml_load_file($filename);
+	private function readFile() {
+		$xml = simplexml_load_file($this -> filename);
 
 		foreach ($xml->user as $user) {
 			$this -> userArray[] = new user(utf8_decode($user -> userId), utf8_decode($user -> password), utf8_decode($user -> lolSessionCookie));
@@ -22,6 +25,24 @@ class userHandler {
 			}
 		}
 		return false;
+	}
+
+	public function verifySession() {
+		if (isset($_COOKIE["userId"]) && isset($_COOKIE["SessionCookie"])){
+			$userId = $_COOKIE["userId"];
+			$sessionCookie = $_COOKIE["SessionCookie"];
+			foreach ($this->userArray as $user) {
+				if ($user -> getUserId() == $userId) {
+					return $user -> verifySessionCookie($sessionCookie);
+				}
+			}
+		}
+		return false;
+	}
+
+	public function logout(){
+		setcookie("userId", "", time()+1);
+		setcookie("SessionCookie", "", time()+1);
 	}
 
 }
@@ -55,7 +76,7 @@ class user {
 		return false;
 	}
 
-	private function verifySessionCookie($lolSessionCookie) {
+	public function verifySessionCookie($lolSessionCookie) {
 		if ($this->lolSessionCookie === $lolSessionCookie) {
 			return true;
 		}

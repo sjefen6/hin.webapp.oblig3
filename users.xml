@@ -3,6 +3,13 @@
 	<user>
 		<userId>sjefen6</userId>
 		<password>704f92016cc0ee756a9a123ff79968e0</password>
-		<lolSessionCookie>crubkIRWpW9fwNf7U3sX7alDeoGAQawLjplyMdGTCUZls21vj9oM6YfpSZXLAYs</lolSessionCookie>
+		<lolSessionCookie>crubkIRWpW9fwNf7U3sX7alDeoGAQawLjplyMdGTCUZls21vj9oM6YfpSZXLAYs
+		</lolSessionCookie>
+	</user>
+	<user>
+		<userId>kc</userId>
+		<password>f1fc8c66b6e89104246e767ad7c2e885</password>
+		<lolSessionCookie>DjP1VgNq0O9VZ5ZPskP3IJozQtTf3Byrmh5tgmADwKx424A63j29wmZep5JRY2x
+		</lolSessionCookie>
 	</user>
 </users>
