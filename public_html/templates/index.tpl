@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>{$title}</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
 	<header>
@@ -21,9 +22,9 @@
 {else}
 	<form action="?login=in" method="post">
 		<label for="userId">Un:</label>
-		<input type="text" name="userId" />
+		<input type="text" name="userId" id="userId" />
 		<label for="password">Pw:</label>
-		<input type="password" name="password" />
+		<input type="password" name="password" id="password" />
 		<input type="submit" value="Sign In" />
 	</form>
 {/if}

@@ -3,7 +3,7 @@
  * Oblig 1
 * @package Example-application
 */
-
+header('Content-Type: text/html; charset=utf-8');
 require('libs/Smarty.class.php');
 require('menu.class.php');
 require('pageHandler.class.php');
@@ -14,10 +14,9 @@ $smarty = new Smarty;
 
 // $smarty->force_compile = true;
 // $smarty->debugging = true;
-$smarty->caching = false;
+//$smarty->caching = false;
 //$smarty->cache_lifetime = 120;
 $smarty->assign("mode","default");
-$smarty->assign("admin",$admin);
 
 /*
  * Litt info om nettsiden
