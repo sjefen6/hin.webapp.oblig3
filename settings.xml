@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
 	<name>Webapp blogg</name>
-	<blog>blogg.xml</blog>
-	<pages>pages.xml</pages>
+	<database>
+		<host>localhost</host>
+		<user>kcblog</user>
+		<password>password</password>
+		<name>kcblog</name>
+		<prefix>kc_</prefix>
+	</database>
 </settings>
