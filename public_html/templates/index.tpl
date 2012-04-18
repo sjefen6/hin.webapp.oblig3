@@ -14,7 +14,7 @@
 	</header>
 	<nav>
 {foreach from=$menu item=i}
-		<a href="{$i.url}">{$i.name}</a>
+		<li><a href="{$i.url}">{$i.name}</a></li>
 {/foreach}
 {if $failed}
 	<span>Loggon failed!</span>
@@ -32,8 +32,8 @@
 	</nav>
 {if $signedIn}
 	<nav>
-		<a href="?admin=addPost">Add Post</a>
-		<a href="?admin=addPage">Add Page</a>
+		<li><a href="?admin=addPost">Add Post</a></li>
+		<li><a href="?admin=addPage">Add Page</a></li>
 	</nav>
 {/if}
 	

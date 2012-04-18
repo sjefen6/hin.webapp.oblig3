@@ -10,15 +10,15 @@ h1 {
     margin: 0;
     text-align: left;
     padding: 2px;
-    background-color: #f0c040;
+    background-color: #0099CC;
     color:  black;
     font-weight: bold;
     font-size: 1.2em;
  }
 
 h2 {
-    background-color: #9B410E;
-    color: white;
+    background-color: #33CCFF;
+    color: black;
     text-align: left;
     font-weight: bold;
     padding: 2px;
@@ -61,12 +61,38 @@ li{
 	padding:0;
 }
 
-a{
-	display:block;
-	width:60px;
-	background-color:#f0ead8;
+nav{
+	width: 100%;
+	float: left;
+	margin: 0 0 3em 0;
+	padding: 0;
+	list-style: none; 
+	background-color: #99FFFF;
+	border-bottom: 1px solid #ccc;
+	border-top: 1px solid #ccc;
+
+	border-radius: 5px;
 }
 
+nav li{
+	float: left;
+}
+
+nav li a{
+	display: block;
+	padding: 3px 15px;
+	text-decoration: none;
+	font-weight: bold;
+	color: #069;
+	border-right: 1px solid #ccc; 
+}
+
+nav li a:hover{
+	color: #c00;
+	background-color: #99CCCC;
+}
+
+/*til arkiv og innloggings delen*/
 .rightbar{
 	float: left;
 	width: 20%;
