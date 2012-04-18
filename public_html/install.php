@@ -8,6 +8,7 @@ if (!file_exists("../settings.xml")) {
 		&& isset($_POST["dbhost"]) && isset($_POST["dbname"])
 		&& isset($_POST["dbuser"]) && isset($_POST["dbpw"])
 		&& isset($_POST["dbprefix"])) {
+			
 
 	}
 
