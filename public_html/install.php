@@ -8,6 +8,9 @@ if (!file_exists("../settings.xml")) {
 		&& isset($_POST["dbhost"]) && isset($_POST["dbname"])
 		&& isset($_POST["dbuser"]) && isset($_POST["dbpw"])
 		&& isset($_POST["dbprefix"])) {
+			
+			
+			
 			$smarty->assign("message","Yep, it funk!");
 
 	} else 	if (isset($_POST["user"]) || isset($_POST["pw"]) || isset($_POST["blogname"])
