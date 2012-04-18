@@ -1,10 +1,19 @@
 <?php
-if (!file_exists ("../settings.xml")){
+if (!file_exists("../settings.xml")) {
 	header('Content-Type: text/html; charset=utf-8');
-	require('libs/Smarty.class.php');
+	require ('libs/Smarty.class.php');
 	$smarty = new Smarty;
-	$smarty->display('install.tpl');
+	
+	if (isset($_POST["user"]) && isset($_POST["pw"]) && isset($_POST["blogname"])
+		&& isset($_POST["dbhost"]) && isset($_POST["dbname"])
+		&& isset($_POST["dbuser"]) && isset($_POST["dbpw"])
+		&& isset($_POST["dbprefix"])) {
+
+	}
+
+	$smarty -> display('install.tpl');
+
 } else {
-	exit;
+	exit ;
 }
 ?>

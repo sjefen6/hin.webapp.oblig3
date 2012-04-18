@@ -26,7 +26,7 @@ h2 {
 }
 
 body {
-    background: black; 
+    background: white; 
 }
 
 p, table, div {
@@ -52,6 +52,38 @@ th, td {
 
 td {
     color: green;
+}
+
+li{
+	float: left;
+	list-style-type:none;
+	margin:0;
+	padding:0;
+}
+
+a{
+	display:block;
+	width:60px;
+	background-color:#f0ead8;
+}
+
+.rightbar{
+	float: left;
+	width: 20%;
+	
+	/* Får ting til å se litt fancy ut */
+	-webkit-border-radius: 5px;
+	-moz-border-radius: 5px;
+	border-radius: 5px;
+}
+
+
+.archive{
+	padding-bottom: 10px 0;
+}
+
+.login{
+	
 }
 
 .odd {

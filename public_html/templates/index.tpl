@@ -2,6 +2,7 @@
 <html>
 <head>
 <title>{$title}</title>
+<link rel="stylesheet" type="text/css" href="browser.css" />
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
