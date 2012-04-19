@@ -9,6 +9,9 @@ if (!file_exists("../settings.xml")) {
 		&& isset($_POST["dbuser"]) && isset($_POST["dbpw"])
 		&& isset($_POST["dbprefix"])) {
 			
+			$createPosts = 
+			"CREATE TABLE posts";
+			
 			
 			
 			$smarty->assign("message","Yep, it funk!");
