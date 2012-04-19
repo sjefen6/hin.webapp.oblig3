@@ -6,6 +6,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 </head>
 <body>
+<section id="wrap">
 	<header>
 		<hgroup>
 			<h1>{$title}</h1>
@@ -16,6 +17,8 @@
 {foreach from=$menu item=i}
 		<li><a href="{$i.url}">{$i.name}</a></li>
 {/foreach}
+	</nav>
+
 {if $failed}
 	<span>Loggon failed!</span>
 {elseif $signedIn}
@@ -28,18 +31,18 @@
 		<input type="password" name="password" id="password" />
 		<input type="submit" value="Sign In" />
 	</form>
-{/if}
-	</nav>
+{/if}	
+	
 {if $signedIn}
 	<nav>
-		<li><a href="?admin=addPost">Add Post</a></li>
-		<li><a href="?admin=addPage">Add Page</a></li>
+		<a href="?admin=addPost">Add Post</a>
+		<a href="?admin=addPage">Add Page</a>
 	</nav>
 {/if}
 	
 	
 {if $mode eq 'bloglist'}
-	<section id="articles">
+	<div id="articles">
 		{foreach from=$articles item=article}
 		<article>
 			<a href="?post={$article.id}"><h1>{$article.title}</h1></a>
@@ -48,27 +51,27 @@
 			</section>
 		</article>
 		{/foreach}
-	</section>
+	</div>
 {elseif $mode eq 'post'}
-	<section id="articles">
+	<div id="articles">
 		<article>
 			<h1>{$post.title}</h1>
 			<section class="articleContent">
 			{$post.desc}
 			</section>
 		</article>
-	</section>
+	</div>
 {elseif $mode eq 'page'}
-	<section id="articles">
+	<div id="articles">
 		<article>
 			<h1>{$page.title}</h1>
 			<section class="articleContent">
 			{$page.desc}
 			</section>
 		</article>
-	</section>
+	</div>
 {elseif $mode eq 'addPost'}
-<section id="articles">
+<div id="articles">
 	<article>
 	<h1>Add Post</h1>
 	<form action="?admin=addPost" method="post">
@@ -81,9 +84,9 @@
 		<input type="submit" value="Add Post" />
 	</form>
 	</article>
-</section>
+</div>
 {elseif $mode eq 'addPage'}
-<section id="articles">
+<div id="articles">
 	<article>
 	<h1>Add Page</h1>
 	<form action="?admin=addPage" method="post">
@@ -96,30 +99,32 @@
 		<input type="submit" value="Add Page" />
 	</form>
 	</article>
-</section>
+</div>
 {elseif $mode eq 'added'}
-<section id="articles">
+<div id="articles">
 	<article>
 	<h1>Added</h1>
 	<p>It was added to the database</p>
 	</article>
 </section>
 {elseif $mode eq 'notAdded'}
-<section id="articles">
+<div id="articles">
 	<article>
 	<h1>Added</h1>
 	<p>It was added to the database</p>
 	</article>
 </section>
 {else}
-	<section id="articles">
+	<div id="articles">
 		<article>
 			<h1>404 Not Found</h1>
 			<section class="articleContent">
 			Ikke funnet.
 			</section>
 		</article>
-	</section>
+	</div>
 {/if}
+<footer><p>Alle rettigheter &copy; Vegard Lang&aring;s, Lena Silseth og Daniel Razafimandimby.<br>Mer info om cms-et p&aring; <a href="https://github.com/sjefen6/webapp-blogg" target="_blank">github</a></p></footer>
+</section>
 </body>
 </html>

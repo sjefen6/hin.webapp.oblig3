@@ -1,32 +1,28 @@
 body, h1, h2, td, th, p {
-    font-family: sans-serif;
-    font-weight: normal;
-    font-size: 0.9em;
     margin: 1px;
     padding: 0;
+}
+
+body{
+	background-color: #33CCCC;
+}
+
+header{
+	height: 150px;
+	background-color: #0099CC;
 }
 
 h1 {
     margin: 0;
     text-align: left;
     padding: 2px;
-    background-color: #0099CC;
     color:  black;
-    font-weight: bold;
-    font-size: 1.2em;
  }
 
 h2 {
-    background-color: #33CCFF;
     color: black;
     text-align: left;
-    font-weight: bold;
     padding: 2px;
-    border-top: 1px solid black;
-}
-
-body {
-    background: white; 
 }
 
 p, table, div {
@@ -64,33 +60,43 @@ li{
 nav{
 	width: 100%;
 	float: left;
-	margin: 0 0 3em 0;
 	padding: 0;
 	list-style: none; 
 	background-color: #99FFFF;
 	border-bottom: 1px solid #ccc;
 	border-top: 1px solid #ccc;
-
-	border-radius: 5px;
 }
 
-nav li{
-	float: left;
-}
-
-nav li a{
-	display: block;
-	padding: 3px 15px;
+nav a{
+	padding-left: 15px;
+	padding-right: 15px;
 	text-decoration: none;
 	font-weight: bold;
 	color: #069;
 	border-right: 1px solid #ccc; 
 }
 
-nav li a:hover{
+nav a:hover{
 	color: #c00;
 	background-color: #99CCCC;
 }
+
+/*hovedkonteiner for bloggen*/
+#wrap{
+	margin-left: auto;
+	margin-right: auto;
+	width: 80%;
+	background-color: #FFFFFF;
+}
+
+footer{
+ 	width: auto;
+ 	clear: both;
+ 	margin: 5px;
+ 	text-align: center;
+ }
+
+
 
 /*til arkiv og innloggings delen*/
 .rightbar{
@@ -100,7 +106,6 @@ nav li a:hover{
 	/* Får ting til å se litt fancy ut */
 	-webkit-border-radius: 5px;
 	-moz-border-radius: 5px;
-	border-radius: 5px;
 }
 
 
@@ -112,23 +117,12 @@ nav li a:hover{
 	
 }
 
-.odd {
-    background-color: #eeeeee;
+#articles{
+	width: 70%;
+	float: left;
 }
 
-.even {
-    background-color: #fafafa;
-}
-
-.exectime {
-    font-size: 0.8em;
-    font-style: italic;
-}
-
-#table_assigned_vars th {
-    color: blue;
-}
-
-#table_config_vars th {
-    color: maroon;
+article h1{
+	font-size: 24px; 
+	background-color: #0099CC;
 }
