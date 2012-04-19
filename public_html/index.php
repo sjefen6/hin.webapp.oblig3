@@ -44,6 +44,7 @@ $smarty->assign('menu',$menu->getMenuArray());
  * Login subutine
 */
 $admin = false;
+$failed = false;
 $users = new userHandler("../users.xml");
 
 if ($users -> verifySession()){
@@ -54,13 +55,14 @@ if (isset($_GET["login"])){
 	if ($_GET["login"] == "in"){
 		$admin = $users->verifyLogin($_POST["userId"], $_POST["password"]);
 		if (!$admin){
-			$smarty->assign("failed", true);
+			$failed =  true;
 		}
 	} else {
 		$users -> logout();
 		$admin = false;
 	}
 }
+$smarty->assign("failed", $failed);
 $smarty->assign("signedIn", $admin);
 
 /*
