@@ -4,6 +4,7 @@
 * @package Example-application
 */
 header('Content-Type: text/html; charset=utf-8');
+date_default_timezone_set("Europe/Berlin");
 require('libs/Smarty.class.php');
 require('menu.class.php');
 require('pageHandler.class.php');
