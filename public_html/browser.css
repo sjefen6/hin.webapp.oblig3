@@ -25,29 +25,10 @@ h2 {
     padding: 2px;
 }
 
-p, table, div {
-    background: #f0ead8;
-} 
-
 p {
     margin: 0;
     font-style: italic;
     text-align: center;
-}
-
-table {
-    width: 100%;
-}
-
-th, td {
-    font-family: monospace;
-    vertical-align: top;
-    text-align: left;
-    width: 50%;
-}
-
-td {
-    color: green;
 }
 
 li{
@@ -59,12 +40,17 @@ li{
 
 nav{
 	width: 100%;
-	float: left;
+	height: 20px;
 	padding: 0;
 	list-style: none; 
-	background-color: #99FFFF;
+	clear: both;
+	background-color: #99CCFF;
 	border-bottom: 1px solid #ccc;
 	border-top: 1px solid #ccc;
+	/*
+	border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;
+	*/
 }
 
 nav a{
@@ -85,44 +71,51 @@ nav a:hover{
 #wrap{
 	margin-left: auto;
 	margin-right: auto;
-	width: 80%;
+	width: 1000px; /* for simpelhetens skyld er kontaineren statisk*/
 	background-color: #FFFFFF;
+	padding: 2px;
 }
 
 footer{
  	width: auto;
  	clear: both;
- 	margin: 5px;
+ 	margin: 0px;
  	text-align: center;
+ 	background: white;
  }
-
-
-
-/*til arkiv og innloggings delen*/
-.rightbar{
-	float: left;
-	width: 20%;
-	
-	/* Får ting til å se litt fancy ut */
-	-webkit-border-radius: 5px;
-	-moz-border-radius: 5px;
-}
-
 
 .archive{
 	padding-bottom: 10px 0;
 }
 
-.login{
-	
+#login{
+	padding: 3px;
+	background: white;	
+}
+
+/*til arkiv og innloggings delen*/
+#rightbar{
+	float: right;
+	width: 200px;
 }
 
 #articles{
-	width: 70%;
+	width: 800px;
 	float: left;
+	padding-top: 5px;
+	background: white;
+}
+
+article{
+	padding-bottom: 15px;
 }
 
 article h1{
 	font-size: 24px; 
 	background-color: #0099CC;
+}
+
+.articleContent{
+	padding-top: 5px;
+	padding-left: 10px;
 }

@@ -17,21 +17,7 @@
 {foreach from=$menu item=i}
 		<li><a href="{$i.url}">{$i.name}</a></li>
 {/foreach}
-	</nav>
-
-{if $failed}
-	<span>Loggon failed!</span>
-{elseif $signedIn}
-	<span>You are <a href="?login=out" alt="Sign Out">signed in</a></span>
-{else}
-	<form action="?login=in" method="post">
-		<label for="userId">Un:</label>
-		<input type="text" name="userId" id="userId" />
-		<label for="password">Pw:</label>
-		<input type="password" name="password" id="password" />
-		<input type="submit" value="Sign In" />
-	</form>
-{/if}	
+	</nav>	
 	
 {if $signedIn}
 	<nav>
@@ -124,6 +110,24 @@
 		</article>
 	</div>
 {/if}
+<div id="rightbar">
+	<h2>dette er en test</h2>
+	<div id="login">
+		{if $failed}
+			<span>Loggon failed!</span>
+		{elseif $signedIn}
+			<span>You are <a href="?login=out" alt="Sign Out">signed in</a></span>
+		{else}
+			<form action="?login=in" method="post">
+				<label for="userId">Un:</label>
+				<input type="text" name="userId" id="userId" /><br/>
+				<label for="password">Pw:</label>
+				<input type="password" name="password" id="password" /><br/>
+				<input type="submit" value="Sign In" />
+			</form>
+		{/if}
+	</div>	
+</div>
 <footer><p>Alle rettigheter &copy; Vegard Lang&aring;s, Lena Silseth og Daniel Razafimandimby.<br>Mer info om cms-et p&aring; <a href="https://github.com/sjefen6/webapp-blogg" target="_blank">github</a></p></footer>
 </section>
 </body>
