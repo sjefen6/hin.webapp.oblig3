@@ -111,7 +111,7 @@
 	</div>
 {/if}
 <div id="rightbar">
-	<h2>dette er en test</h2>
+	<h2>PLACEHOLDER ARCHIVE</h2>
 	<div id="login">
 		{if $failed}
 			<span>Loggon failed!</span>

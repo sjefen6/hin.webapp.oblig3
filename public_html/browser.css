@@ -115,6 +115,23 @@ article h1{
 	background-color: #0099CC;
 }
 
+article form{
+	padding: 5px;
+}
+
+article form label{
+  	margin-right:0.5em;
+  	padding-top:0.2em;
+  	text-align:right;
+}
+
+article form textarea{
+	width: 99%;
+	height: 300px;
+	resize: none; 
+	overflow: auto;
+}	
+
 .articleContent{
 	padding-top: 5px;
 	padding-left: 10px;
