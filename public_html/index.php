@@ -106,7 +106,19 @@ if (isset($_GET["page"])) {
 		} else {
 			$smarty->assign("mode","addPost");
 		}
-	} else {
+	} else if ($_GET["admin"] == "newUser"){
+		if (isset($_POST["userName"])){
+			if ($users->addUser($_POST["userName"],$_POST["password"],
+					$_POST["confirmPassword"],$_POST["firstName"],
+					$_POST["lastName"],$_POST["email"])){
+				$smarty->assign("mode","added");
+			} else {
+				$smarty->assign("mode","notAdded");
+			}
+		} else {
+			$smarty->assign("mode","newUser");
+		} 
+	}else {
 		header("Status: 404 Not Found");
 	}
 } else {

@@ -100,10 +100,30 @@ footer{
 }
 
 #articles{
-	width: 800px;
+	width: 790px;
 	float: left;
 	padding-top: 5px;
+	padding-right: 10px;
 	background: white;
+}
+
+#registrationform{
+	width: 50%;
+}
+
+#registrationform input{
+	margin-bottom: 3px;
+}
+
+#registrationform label{
+	font-weight: bold;
+	display: block;
+	width: 150px;
+	float: left;
+}
+
+#registrationform img{
+	float: right;
 }
 
 article{
@@ -114,6 +134,23 @@ article h1{
 	font-size: 24px; 
 	background-color: #0099CC;
 }
+
+article form{
+	padding: 5px;
+}
+
+article form label{
+  	margin-right:0.5em;
+  	padding-top:0.2em;
+  	text-align:right;
+}
+
+article form textarea{
+	width: 99%;
+	height: 300px;
+	resize: none; 
+	overflow: auto;
+}	
 
 .articleContent{
 	padding-top: 5px;
