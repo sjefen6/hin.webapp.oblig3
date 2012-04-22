@@ -86,6 +86,35 @@
 	</form>
 	</article>
 </div>
+{elseif $mode eq 'newUser'}
+<div id="articles">
+	<article>
+		<h1>Register here</h1>
+		
+		<div id="registrationform">
+		<form action="?admin=newUser" method="post">
+			<label for="firstName">First name:</label>
+			<input type="text" name="firstName" required="required" /><br>
+			<label for="lastName">Last name:</label>
+			<input type="text" name="lastName" required="required" /><br>
+			<label for="email">E-mail address:</label>
+			<input type="text" name="email" required="required" /><br>
+			<br>
+			<label for="userName">User name:</label>
+			<input type="text" name="userName" required="required" /><br>
+			<label for"password">Password:</label>
+			<input type="password" name="password" required="required" /><br>
+			<label for="confirmPassword">Confirm password:</label>
+			<input type="password" name="confirmPassword" required="required" /><br>
+			<br>
+			<input type="submit" value="Register" />
+		</form>
+		
+		<img src="http://media.comicvine.com/uploads/5/52044/1476978-1280118961161.jpg" alt="Register comic" width="324" height="250" />
+		</div>
+		
+	</article>
+</div>
 {elseif $mode eq 'added'}
 <div id="articles">
 	<article>
@@ -125,6 +154,8 @@
 				<input type="password" name="password" id="password" /><br/>
 				<input type="submit" value="Sign In" />
 			</form>
+			<br>
+			<a href="?admin=newUser">Register here<a>
 		{/if}
 	</div>	
 </div>

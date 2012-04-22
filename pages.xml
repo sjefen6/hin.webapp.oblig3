@@ -13,4 +13,10 @@
 <time>1330971893</time>
 <description><![CDATA[lol]]></description>
 </page>
+<page>
+<id>test</id>
+<title>Test</title>
+<time>1335015481</time>
+<description><![CDATA[<?php echo "<p>dette er php kode</p>"; ?>]]></description>
+</page>
 </pages>
