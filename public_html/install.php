@@ -20,7 +20,7 @@ if (!file_exists($settingsFile)) {
 			$settings = new settings($settingsFile, $_POST["blogname"], $_POST["dbhost"], $_POST["dbuser"], $_POST["dbpw"], $_POST["dbname"], $_POST["dbprefix"]);
 			
 			// I don't see the point in cleaning input at this stage.
-			// If an attacker is able to use this script he can make hell without exploining injections.
+			// If an attacker is able to use this script he can make hell without exploiting injections.
 			
 			$user = $_POST["user"];
 			$pw = $_POST["pw"];
@@ -42,11 +42,11 @@ if (!file_exists($settingsFile)) {
          		"salt VARCHAR(100)," . //this is supposed to be a hashed value
          		"validationkey VARCHAR(100)," .
          		"usermode TINYINT," . // -1 = not validated, 0 = disabeled, 1 = active
-         		"userlevel TINYINT," .
+         		"userlevel TINYINT" .
        		");";
 			
 			$createPosts = 
-			"CREATE TABLE " . $dbprefix . "posts  (" .
+			"CREATE TABLE " . $dbprefix . "posts (" .
          		"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," .
          		"title VARCHAR(100)," .
          		"url_id VARCHAR(100)," .
@@ -60,7 +60,7 @@ if (!file_exists($settingsFile)) {
        		");";
 			
 			$createPages = 
-			"CREATE TABLE " . $dbprefix . "pages  (" .
+			"CREATE TABLE " . $dbprefix . "pages (" .
          		"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," .
          		"title VARCHAR(100)," .
          		"url_id VARCHAR(100)," .
@@ -74,7 +74,7 @@ if (!file_exists($settingsFile)) {
        		");";
 			
 			$createComments = 
-			"CREATE TABLE " . $dbprefix . "pages  (" .
+			"CREATE TABLE " . $dbprefix . "comments (" .
          		"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," .
          		"post_id INT," .
          		"page_id INT," .
@@ -96,12 +96,14 @@ if (!file_exists($settingsFile)) {
        		");";
        		
 			
-       		// $db = $settings -> getDatabase();
-//        		
-			// $db -> exec($createUsers) or die(print_r($db->errorInfo(), true));
-			// $db -> exec($createPosts) or die(print_r($db->errorInfo(), true));
-			// $db -> exec($createPages) or die(print_r($db->errorInfo(), true));
-			// $db -> exec($createComments) or die(print_r($db->errorInfo(), true));
+       		$db = $settings -> getDatabase();
+       		
+			$db -> exec($createUsers);
+			$db -> exec($createPosts);
+			$db -> exec($createPages);
+			$db -> exec($createComments);
+			
+			//TODO: Add the user to the database!
 			
 			$smarty->assign("message","<pre>$createUsers\n$createPosts\n$createPages\n$createComments</pre>");
 
