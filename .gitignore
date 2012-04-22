@@ -3,3 +3,4 @@ cgi-bin
 public_html/templates_c*
 public_html/error_log
 /README.TXT
+settings.xml

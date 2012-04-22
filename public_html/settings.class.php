@@ -12,12 +12,26 @@ class settings {
 
 	private $database;
 
-	function __construct($filename) {
+	function __construct($filename, $name=null, $dbhost=null, $dbuser=null, $dbpw=null, $dbname=null, $dbprefix=null) {
 		$this -> filename = $filename;
+		
+		if (!file_exists($this -> filename)) {
+			if ($name == NULL || $dbhost == null || $dbuser == null || $dbpw == null || $dbname == null || $dbprefix == null){
+				die("Something is wrong, time to quit!");
+			}
+			$this -> name = $name;
+			$this -> dbhost = $dbhost;
+			$this -> dbuser = $dbuser;
+			$this -> dbpw = $dbpw;
+			$this -> dbname = $dbname;
+			$this -> dbprefix = $dbprefix;
+			
+			$this -> createSettings();
+		}
 
 		$this -> readFile();
 
-		$database = new PDO('mysql:host=' . $this -> dbhost . ';dbname=' . $this -> dbname, $this -> dbuser, $this -> dbpw);
+		$this -> database = new PDO('mysql:host=' . $this -> dbhost . ';dbname=' . $this -> dbname, $this -> dbuser, $this -> dbpw);
 	}
 
 	private function readFile() {
@@ -31,7 +45,7 @@ class settings {
 		$dbprefix = utf8_decode($xml -> database -> prefix);
 	}
 
-	public function getDatabae() {
+	public function getDatabase() {
 		return $this -> database;
 	}
 
@@ -40,7 +54,7 @@ class settings {
 	}
 
 	public function createSettings() {
-		$xml_ny = "<settings\n" . "\t<name>$this->name</name>\n" . "\t<database>\n" . "\t\t<host>$this->dbhost</host>\n" . "\t\t<user>$this->dbuser</user>\n" . "\t\t<password>$this->dbpw</password>\n" . "\t\t<name>$this->dbname</name>\n" . "\t\t<prefix>$this->dbprefix</prefix>\n" . "\t</database>\n" . "\t</settings>";
+		$xml_ny = "<settings>\n" ."\t<name>$this->name</name>\n" . "\t<database>\n" . "\t\t<host>$this->dbhost</host>\n" . "\t\t<user>$this->dbuser</user>\n" . "\t\t<password>$this->dbpw</password>\n" . "\t\t<name>$this->dbname</name>\n" . "\t\t<prefix>$this->dbprefix</prefix>\n" . "\t</database>\n" . "\t</settings>";
 
 		$xml = simplexml_load_string($xml_ny);
 
