@@ -4,6 +4,7 @@ class settings {
 	private $filename;
 
 	private $name;
+	private $tagline;
 	private $dbhost;
 	private $dbuser;
 	private $dbpw;
@@ -12,14 +13,15 @@ class settings {
 
 	private $database;
 
-	function __construct($filename, $name=null, $dbhost=null, $dbuser=null, $dbpw=null, $dbname=null, $dbprefix=null) {
+	function __construct($filename, $name=null, $tagline=null, $dbhost=null, $dbuser=null, $dbpw=null, $dbname=null, $dbprefix=null) {
 		$this -> filename = $filename;
 		
 		if (!file_exists($this -> filename)) {
-			if ($name == NULL || $dbhost == null || $dbuser == null || $dbpw == null || $dbname == null || $dbprefix == null){
+			if ($name == NULL || $tagline == NULL || $dbhost == null || $dbuser == null || $dbpw == null || $dbname == null || $dbprefix == null){
 				die("Something is wrong, time to quit!");
 			}
 			$this -> name = $name;
+			$this -> tagline = $tagline;
 			$this -> dbhost = $dbhost;
 			$this -> dbuser = $dbuser;
 			$this -> dbpw = $dbpw;
@@ -54,7 +56,17 @@ class settings {
 	}
 
 	public function createSettings() {
-		$xml_ny = "<settings>\n" ."\t<name>$this->name</name>\n" . "\t<database>\n" . "\t\t<host>$this->dbhost</host>\n" . "\t\t<user>$this->dbuser</user>\n" . "\t\t<password>$this->dbpw</password>\n" . "\t\t<name>$this->dbname</name>\n" . "\t\t<prefix>$this->dbprefix</prefix>\n" . "\t</database>\n" . "\t</settings>";
+		$xml_ny = "<settings>\n" . 
+			"\t<name>$this->name</name>\n" .
+			"\t<tagline>$this->name</tagline>\n" .
+			"\t<database>\n" .
+				"\t\t<host>$this->dbhost</host>\n" .
+				"\t\t<user>$this->dbuser</user>\n" .
+				"\t\t<password>$this->dbpw</password>\n" .
+				"\t\t<name>$this->dbname</name>\n" .
+				"\t\t<prefix>$this->dbprefix</prefix>\n" .
+				"\t</database>\n" .
+			"\t</settings>";
 
 		$xml = simplexml_load_string($xml_ny);
 

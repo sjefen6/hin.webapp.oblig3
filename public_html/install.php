@@ -5,19 +5,19 @@ if (!file_exists($settingsFile)) {
 	require ('libs/Smarty.class.php');
 	$smarty = new Smarty;
 	
-	$all = isset($_POST["user"]) && isset($_POST["pw"]) && isset($_POST["blogname"])
+	$all = isset($_POST["user"]) && isset($_POST["pw"]) && isset($_POST["blogname"]) && isset($_POST["tagline"])
 		&& isset($_POST["dbhost"]) && isset($_POST["dbname"])
 		&& isset($_POST["dbuser"]) && isset($_POST["dbpw"])
 		&& isset($_POST["dbprefix"]);
 		
-	$oneOrMore = isset($_POST["user"]) || isset($_POST["pw"]) || isset($_POST["blogname"])
+	$oneOrMore = isset($_POST["user"]) || isset($_POST["pw"]) || isset($_POST["blogname"]) || isset($_POST["tagline"])
 		|| isset($_POST["dbhost"]) || isset($_POST["dbname"])
 		|| isset($_POST["dbuser"]) || isset($_POST["dbpw"])
 		|| isset($_POST["dbprefix"]);
 	
 	if ($all) {
 			require 'settings.class.php';
-			$settings = new settings($settingsFile, $_POST["blogname"], $_POST["dbhost"], $_POST["dbuser"], $_POST["dbpw"], $_POST["dbname"], $_POST["dbprefix"]);
+			$settings = new settings($settingsFile, $_POST["blogname"], $_POST["tagline"], $_POST["dbhost"], $_POST["dbuser"], $_POST["dbpw"], $_POST["dbname"], $_POST["dbprefix"]);
 			
 			// I don't see the point in cleaning input at this stage.
 			// If an attacker is able to use this script he can make hell without exploiting injections.
