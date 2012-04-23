@@ -15,7 +15,7 @@
 	</header>
 	<nav>
 {foreach from=$menu item=i}
-		<li><a href="{$i.url}">{$i.name}</a></li>
+		<a href="{$i.url}">{$i.name}</a>
 {/foreach}
 	</nav>	
 	
@@ -75,7 +75,7 @@
 <div id="articles">
 	<article>
 	<h1>Add Page</h1>
-	<form action="?admin=addPage" method="post">
+	<form action="?page=addPage" method="post">
 		<label for="title">Title:</label>
 		<input type="text" name="title" required="required" /><br>
 		<label for="id">Id:</label>
@@ -107,7 +107,7 @@
 			<label for="confirmPassword">Confirm password:</label>
 			<input type="password" name="confirmPassword" required="required" /><br>
 			<br>
-			<input type="submit" value="Register" />
+			<input type="submit" value="Register" />(not yet implemented)
 		</form>
 		
 		<img src="http://media.comicvine.com/uploads/5/52044/1476978-1280118961161.jpg" alt="Register comic" width="324" height="250" />
@@ -134,7 +134,7 @@
 		<article>
 			<h1>404 Not Found</h1>
 			<section class="articleContent">
-			Ikke funnet.
+			<img src="http://www.webdigi.co.uk/include/404%20cat.jpg" />
 			</section>
 		</article>
 	</div>
@@ -155,7 +155,7 @@
 				<input type="submit" value="Sign In" />
 			</form>
 			<br>
-			<a href="?admin=newUser">Register here<a>
+			<a href="?admin=newUser">Register here</a>
 		{/if}
 	</div>	
 </div>

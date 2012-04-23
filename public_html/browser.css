@@ -85,7 +85,7 @@ footer{
  }
 
 .archive{
-	padding-bottom: 10px 0;
+	padding-bottom: 10px;
 }
 
 #login{
@@ -148,7 +148,7 @@ article form label{
 article form textarea{
 	width: 99%;
 	height: 300px;
-	resize: none; 
+	resize: none;
 	overflow: auto;
 }	
 
