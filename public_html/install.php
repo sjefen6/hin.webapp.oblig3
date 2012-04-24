@@ -35,25 +35,25 @@ if (!file_exists($settingsFile)) {
 			$createUsers = 
 			"CREATE TABLE " . $dbprefix . "users (" .
          		"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," .
-         		"username VARCHAR(100)," .
+         		"username VARCHAR(100) NOT NULL," .
          		"email VARCHAR(200)," .
          		"firstname VARCHAR(100)," .
          		"lastname VARCHAR(100)," .
-         		"password VARCHAR(100)," . //this is supposed to be a hashed value
-         		"salt VARCHAR(100)," . //this is supposed to be a hashed value
-         		"validationkey VARCHAR(100)," .
-         		"session_cookie VARCHAR(100)," .
-         		"usermode TINYINT," . // -1 = not validated, 0 = disabeled, 1 = active
-         		"userlevel TINYINT" .
+         		"password VARCHAR(100) NOT NULL," . //this is supposed to be a hashed value
+         		"salt VARCHAR(100) NOT NULL," . //this is supposed to be a hashed value
+         		"validationkey VARCHAR(100) NOT NULL," .
+         		"session_cookie VARCHAR(100) NOT NULL," .
+         		"usermode TINYINT NOT NULL," . // -1 = not validated, 0 = disabeled, 1 = active
+         		"userlevel TINYINT NOT NULL" .
        		");";
 			
 			$createPosts = 
 			"CREATE TABLE " . $dbprefix . "posts (" .
          		"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," .
-         		"title VARCHAR(100)," .
-         		"url_id VARCHAR(100)," .
-         		"time BIGINT(12)," .
-         		"author_id INT," .
+         		"title VARCHAR(100) NOT NULL," .
+         		"url_id VARCHAR(100) NOT NULL," .
+         		"time BIGINT(12) NOT NULL," .
+         		"author_id INT NOT NULL," .
          		"content TEXT," .
          		// FOREIGN KEY for author_id -> kc_users(id)
          		"INDEX usr_id (author_id)," .
@@ -64,10 +64,10 @@ if (!file_exists($settingsFile)) {
 			$createPages = 
 			"CREATE TABLE " . $dbprefix . "pages (" .
          		"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," .
-         		"title VARCHAR(100)," .
-         		"url_id VARCHAR(100)," .
-         		"time BIGINT(12)," .
-         		"author_id INT," .
+         		"title VARCHAR(100) NOT NULL," .
+         		"url_id VARCHAR(100) NOT NULL," .
+         		"time BIGINT(12) NOT NULL," .
+         		"author_id INT NOT NULL," .
          		"content TEXT," .
          		// FOREIGN KEY for author_id -> kc_users(id)
          		"INDEX usr_id (author_id)," .
@@ -80,9 +80,9 @@ if (!file_exists($settingsFile)) {
          		"id INT NOT NULL AUTO_INCREMENT PRIMARY KEY," .
          		"post_id INT," .
          		"page_id INT," .
-         		"time BIGINT(12)," .
-         		"author_id INT," .
-         		"content TEXT," .
+         		"time BIGINT(12) NOT NULL," .
+         		"author_id INT NOT NULL," .
+         		"content TEXT NOT NULL," .
          		// FOREIGN KEY for author_id -> kc_users(id)
          		"INDEX usr_id (author_id)," .
                 "FOREIGN KEY (author_id) REFERENCES " . $dbprefix . "users(id)" .
@@ -108,7 +108,7 @@ if (!file_exists($settingsFile)) {
 			//TODO: Add the user to the database!
 			require('userHandler.class.php');
 			$users = new userHandler();
-			$users -> addUser($user, "", "", "", $pw, 0);
+			$users -> addUser($user, "", "", "", $pw, 0, 1);
 			
 			$smarty->assign("message","<pre>$createUsers\n$createPosts\n$createPages\n$createComments</pre>");
 

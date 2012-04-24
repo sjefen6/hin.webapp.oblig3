@@ -13,7 +13,7 @@ require('postHandler.class.php');
 require('userHandler.class.php');
 require('settings.class.php');
 
-$settings = new Settings('../settings.xml');
+$settings = new settings("../settings.xml");
 $smarty = new Smarty;
 
 // $smarty->force_compile = true;
