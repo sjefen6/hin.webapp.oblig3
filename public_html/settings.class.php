@@ -14,30 +14,30 @@ class settings {
 	private static $database;
 
 	function __construct($filename, $name=null, $tagline=null, $dbhost=null, $dbuser=null, $dbpw=null, $dbname=null, $dbprefix=null) {
-		$this -> filename = $filename;
+		self::$filename = $filename;
 		
-		if (!file_exists($this -> filename)) {
+		if (!file_exists(self::$filename)) {
 			if ($name == NULL || $tagline == NULL || $dbhost == null || $dbuser == null || $dbpw == null || $dbname == null || $dbprefix == null){
 				die("Something is wrong, time to quit!");
 			}
-			$this -> name = $name;
-			$this -> tagline = $tagline;
-			$this -> dbhost = $dbhost;
-			$this -> dbuser = $dbuser;
-			$this -> dbpw = $dbpw;
-			$this -> dbname = $dbname;
-			$this -> dbprefix = $dbprefix;
+			self::$name = $name;
+			self::$tagline = $tagline;
+			self::$dbhost = $dbhost;
+			self::$dbuser = $dbuser;
+			self::$dbpw = $dbpw;
+			self::$dbname = $dbname;
+			self::$dbprefix = $dbprefix;
 			
 			$this -> createSettings();
 		}
 
 		$this -> readFile();
 
-		$this -> database = new PDO('mysql:host=' . $this -> dbhost . ';dbname=' . $this -> dbname, $this -> dbuser, $this -> dbpw);
+		self::$database = new PDO('mysql:host=' . self::$dbhost . ';dbname=' . self::$dbname, self::$dbuser, self::$dbpw);
 	}
 
 	private function readFile() {
-		$xml = simplexml_load_file($this -> filename);
+		$xml = simplexml_load_file(self::$filename);
 
 		$name = utf8_decode($xml -> settings -> name);
 		$dbhost = utf8_decode($xml -> database -> host);
@@ -48,11 +48,11 @@ class settings {
 	}
 
 	public static function getDatabase() {
-		return $this -> database;
+		return self::$database;
 	}
 
 	public static function getDbPrefix() {
-		return $this -> dbprefix;
+		return self::$dbprefix;
 	}
 
 	private function createSettings() {
@@ -71,7 +71,7 @@ class settings {
 		$xml = simplexml_load_string($xml_ny);
 
 		// Lagre endrede XML data til fil, skrivekasess til fil n¿dvendig for apache web tjener
-		file_put_contents($this -> filename, $xml -> asXML());
+		file_put_contents(self::$filename, $xml -> asXML());
 	}
 
 }

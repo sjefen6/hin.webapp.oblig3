@@ -25,6 +25,7 @@ if (!file_exists($settingsFile)) {
 			$user = $_POST["user"];
 			$pw = $_POST["pw"];
 			$blogname = $_POST["blogname"];
+			$tagline = $_POST["tagline"];
 			$dbhost = $_POST["dbhost"];
 			$dbname = $_POST["dbname"];
 			$dbuser = $_POST["dbuser"];
@@ -97,7 +98,7 @@ if (!file_exists($settingsFile)) {
        		");";
        		
 			
-       		$db = $settings -> getDatabase();
+       		$db = settings::getDatabase();
        		
 			$db -> exec($createUsers);
 			$db -> exec($createPosts);
@@ -105,6 +106,9 @@ if (!file_exists($settingsFile)) {
 			$db -> exec($createComments);
 			
 			//TODO: Add the user to the database!
+			require('userHandler.class.php');
+			$users = new userHandler();
+			$users -> addUser($user, "", "", "", $pw, 0);
 			
 			$smarty->assign("message","<pre>$createUsers\n$createPosts\n$createPages\n$createComments</pre>");
 

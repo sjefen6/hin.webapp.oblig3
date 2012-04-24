@@ -3,7 +3,7 @@
 class userHandler {
 	private $userArray;
 
-	function __construct($settings) {
+	function __construct() {
 		/*** The SQL SELECT statement ***/
 		$sql = "SELECT * FROM " . settings::getDbPrefix() . "users";
 
@@ -11,7 +11,7 @@ class userHandler {
 		$stmt = settings::getDatabase() -> query($sql);
 
 		/*** fetch into the animals class ***/
-		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'users');
+		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'user');
 	}
 
 	// private function readFile() {
@@ -22,9 +22,9 @@ class userHandler {
 	// }
 	// }
 
-	public function verifyLogin($userId, $password) {
+	public function verifyLogin($username, $password) {
 		foreach ($this->userArray as $user) {
-			if ($user -> getUserId() == $userId) {
+			if ($user -> getUsername() == $username) {
 				return $user -> verifyPasword($password);
 			}
 		}
@@ -32,9 +32,9 @@ class userHandler {
 	}
 
 	public function verifySession() {
-		if (isset($_COOKIE["userId"]) && isset($_COOKIE["SessionCookie"])) {
-			$userId = $_COOKIE["userId"];
-			$sessionCookie = $_COOKIE["SessionCookie"];
+		if (isset($_COOKIE["username"]) && isset($_COOKIE["session_cookie"])) {
+			$userId = $_COOKIE["username"];
+			$sessionCookie = $_COOKIE["session_cookie"];
 			foreach ($this->userArray as $user) {
 				if ($user -> getUserId() == $userId) {
 					return $user -> verifySessionCookie($sessionCookie);
@@ -44,14 +44,13 @@ class userHandler {
 		return false;
 	}
 
-	public function addUser() {
-		setcookie("userId", "", time() + 1);
-		setcookie("SessionCookie", "", time() + 1);
+	public function addUser($username, $email, $firstname, $lastname, $password, $userlevel) {
+		$this -> userArray[] = new user($username, $email, $firstname, $lastname, $password, $userlevel);
 	}
 
 	public function logout() {
-		setcookie("userId", "", time() + 1);
-		setcookie("SessionCookie", "", time() + 1);
+		setcookie("username", "", time() + 1);
+		setcookie("session_cookie", "", time() + 1);
 	}
 
 }
@@ -71,9 +70,9 @@ class user {
 
 	function __construct($username, $email, $firstname, $lastname, $password, $userlevel) {
 		// Lets fill thows fields that needs some random stuff
-		$this -> salt = random_gen(30);
-		$this -> session_cookie = random_gen(30);
-		$this -> validationkey = random_gen(30);
+		$this -> salt = $this -> random_gen(30);
+		$this -> session_cookie = $this -> random_gen(30);
+		$this -> validationkey = $this -> random_gen(30);
 		
 		$this -> username = $username;
 		$this -> email = $email;
@@ -81,9 +80,11 @@ class user {
 		$this -> lastname = $lastname;
 		$this -> setPassword($password);
 		$this -> userlevel = $userlevel;
+		
+		$this -> save(true);
 	}
 
-	public function getUserId() {
+	public function getUsername() {
 		return $this -> userId;
 	}
 
@@ -127,11 +128,9 @@ class user {
 		$char_list .= "abcdefghijklmnopqrstuvwxyz";
 		$char_list .= "1234567890";
 		// Add the special characters to $char_list if needed
-
 		for ($i = 0; $i < $length; $i++) {
 			$random .= substr($char_list, (rand() % (strlen($char_list))), 1);
 		}
-		
 		return $random;
 	}
 	
@@ -160,12 +159,10 @@ class user {
 								':lastname'=>$this -> lastname,
 								':password'=>$this -> password,
 								':salt'=>$this -> salt,
-								':username'=>$this -> username,
-
-								':title'=>$title));
-
-		
+								':validationkey'=>$this -> validationkey,
+								':session_cookie'=>$this -> session_cookie,
+								':usermode'=>$this -> usermode,
+								':userlevel'=>$this -> userlevel));
 	}
-
 }
 ?>
