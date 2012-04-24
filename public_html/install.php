@@ -41,6 +41,7 @@ if (!file_exists($settingsFile)) {
          		"password VARCHAR(100)," . //this is supposed to be a hashed value
          		"salt VARCHAR(100)," . //this is supposed to be a hashed value
          		"validationkey VARCHAR(100)," .
+         		"session_cookie VARCHAR(100)," .
          		"usermode TINYINT," . // -1 = not validated, 0 = disabeled, 1 = active
          		"userlevel TINYINT" .
        		");";
