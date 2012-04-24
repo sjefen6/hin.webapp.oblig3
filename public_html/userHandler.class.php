@@ -44,8 +44,8 @@ class userHandler {
 		return false;
 	}
 
-	public function addUser($username, $email, $firstname, $lastname, $password, $userlevel) {
-		$this -> userArray[] = new user($username, $email, $firstname, $lastname, $password, $userlevel);
+	public function addUser($username, $email, $firstname, $lastname, $password, $userlevel, $usermode) {
+		$this -> userArray[] = new user($username, $email, $firstname, $lastname, $password, $userlevel, $usermode);
 	}
 
 	public function logout() {
@@ -68,8 +68,8 @@ class user {
 	private $usermode;
 	private $userlevel;
 
-	function __construct($username = null, $email = null, $firstname = null, $lastname = null, $password = null, $userlevel = null) {
-		if ($username == null || $email == null || $firstname == null || $lastname == null || $password == null || $userlevel == null) {
+	function __construct($username = null, $email = null, $firstname = null, $lastname = null, $password = null, $userlevel = null, $usermode = null) {
+		if ($username == null || $email == null || $firstname == null || $lastname == null || $password == null || $userlevel == null || $usermode == null) {
 			// Lets fill thows fields that needs some random stuff
 			$this -> salt = $this -> random_gen(30);
 			$this -> session_cookie = $this -> random_gen(30);
@@ -81,6 +81,7 @@ class user {
 			$this -> lastname = $lastname;
 			$this -> setPassword($password);
 			$this -> userlevel = $userlevel;
+			$this -> usermode = $usermode;
 
 			$this -> save(true);
 		}
@@ -95,6 +96,7 @@ class user {
 	}
 
 	public function verifyPasword($password) {
+		// echo $password . $this -> salt;
 		if ($this -> password === sha1($password . $this -> salt)) {
 			$this -> session_cookie = random_gen(30);
 			setcookie("username", $this -> username);
