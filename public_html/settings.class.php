@@ -58,7 +58,7 @@ class settings {
 	private function createSettings() {
 		$xml_ny = "<settings>\n" . 
 			"\t<name>$this->name</name>\n" .
-			"\t<tagline>$this->name</tagline>\n" .
+			"\t<tagline>$this->tagline</tagline>\n" .
 			"\t<database>\n" .
 				"\t\t<host>$this->dbhost</host>\n" .
 				"\t\t<user>$this->dbuser</user>\n" .

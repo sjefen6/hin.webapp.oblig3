@@ -152,7 +152,19 @@ class user {
 		$stmt = settings::getDatabase()->prepare($sql);
 
 		/*** fetch into the animals class ***/
-		$$stmt -> execute(array(':id'=>$this -> id,
+		if ($new){
+			$stmt -> execute(array(':username'=>$this -> username,
+								':email'=>$this -> email,
+								':firstname'=>$this -> firstname,
+								':lastname'=>$this -> lastname,
+								':password'=>$this -> password,
+								':salt'=>$this -> salt,
+								':validationkey'=>$this -> validationkey,
+								':session_cookie'=>$this -> session_cookie,
+								':usermode'=>$this -> usermode,
+								':userlevel'=>$this -> userlevel));
+		} else {
+			$stmt -> execute(array(':id'=>$this -> id,
 								':username'=>$this -> username,
 								':email'=>$this -> email,
 								':firstname'=>$this -> firstname,
@@ -163,6 +175,7 @@ class user {
 								':session_cookie'=>$this -> session_cookie,
 								':usermode'=>$this -> usermode,
 								':userlevel'=>$this -> userlevel));
+		}
 	}
 }
 ?>
