@@ -115,20 +115,27 @@
 		
 	</article>
 </div>
+{elseif $mode eq 'addedUser'}
+<div id="articles">
+	<article>
+		<h1>Successfully registered!</h1>
+		<p>An e-mail has been sent to your mail to verify.</p>
+	</article>
+</div>
 {elseif $mode eq 'added'}
 <div id="articles">
 	<article>
 	<h1>Added</h1>
 	<p>It was added to the database</p>
 	</article>
-</section>
+</div>
 {elseif $mode eq 'notAdded'}
 <div id="articles">
 	<article>
-	<h1>Added</h1>
-	<p>It was added to the database</p>
+	<h1>Error</h1>
+	<p>Something went wrong, please try again.</p>
 	</article>
-</section>
+</div>
 {else}
 	<div id="articles">
 		<article>

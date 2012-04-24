@@ -4,7 +4,7 @@ body, h1, h2, td, th, p {
 }
 
 body{
-	background-color: #33CCCC;
+	background-color: #6699FF;
 }
 
 header{
@@ -73,7 +73,9 @@ nav a:hover{
 	margin-right: auto;
 	width: 1000px; /* for simpelhetens skyld er kontaineren statisk*/
 	background-color: #FFFFFF;
-	padding: 2px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-bottom: 2px;
 }
 
 footer{

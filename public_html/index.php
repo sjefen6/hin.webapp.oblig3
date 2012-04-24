@@ -11,7 +11,9 @@ require('menu.class.php');
 require('pageHandler.class.php');
 require('postHandler.class.php');
 require('userHandler.class.php');
+require('settings.class.php');
 
+$settings = new Settings('../settings.xml');
 $smarty = new Smarty;
 
 // $smarty->force_compile = true;
@@ -111,7 +113,7 @@ if (isset($_GET["page"])) {
 			if ($users->addUser($_POST["userName"],$_POST["password"],
 					$_POST["confirmPassword"],$_POST["firstName"],
 					$_POST["lastName"],$_POST["email"])){
-				$smarty->assign("mode","added");
+				$smarty->assign("mode","userAdded");
 			} else {
 				$smarty->assign("mode","notAdded");
 			}
