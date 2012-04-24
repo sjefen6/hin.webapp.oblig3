@@ -5,13 +5,19 @@ class userHandler {
 
 	function __construct() {
 		/*** The SQL SELECT statement ***/
-		$sql = "SELECT * FROM " . settings::getDbPrefix() . "users";
+		$sql = "SELECT id, username, email, firstname, lastname, password, salt, validationkey, session_cookie, usermode, userlevel FROM " . settings::getDbPrefix() . "users";
 
 		/*** fetch into an PDOStatement object ***/
-		$stmt = settings::getDatabase() -> query($sql);
+		$stmt = settings::getDatabase() -> prepare($sql);
+		
+		$stmt->execute();
 
 		/*** fetch into the animals class ***/
 		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'user');
+		
+		echo "var_dump:\n";
+		var_dump($this -> userArray);
+		echo "var_dump ended\n";
 	}
 
 	// private function readFile() {
@@ -23,7 +29,9 @@ class userHandler {
 	// }
 
 	public function verifyLogin($username, $password) {
+		echo $username . " " . $password;
 		foreach ($this->userArray as $user) {
+			echo "!!!" . $user -> getUsername() . "!!!";
 			if ($user -> getUsername() == $username) {
 				return $user -> verifyPasword($password);
 			}
@@ -56,17 +64,17 @@ class userHandler {
 }
 
 class user {
-	private $id;
-	private $username;
-	private $email;
-	private $firstname;
-	private $lastname;
-	private $password;
-	private $salt;
-	private $validationkey;
-	private $session_cookie;
-	private $usermode;
-	private $userlevel;
+	public $id;
+	public $username;
+	public $email;
+	public $firstname;
+	public $lastname;
+	public $password;
+	public $salt;
+	public $validationkey;
+	public $session_cookie;
+	public $usermode;
+	public $userlevel;
 
 	function __construct($username = null, $email = null, $firstname = null, $lastname = null, $password = null, $userlevel = null, $usermode = null) {
 		if ($username == null || $email == null || $firstname == null || $lastname == null || $password == null || $userlevel == null || $usermode == null) {
@@ -88,7 +96,7 @@ class user {
 	}
 
 	public function getUsername() {
-		return $this -> userId;
+		return $this -> username;
 	}
 
 	private function setPassword($password) {
@@ -96,7 +104,7 @@ class user {
 	}
 
 	public function verifyPasword($password) {
-		// echo $password . $this -> salt;
+		echo $password . $this -> salt;
 		if ($this -> password === sha1($password . $this -> salt)) {
 			$this -> session_cookie = random_gen(30);
 			setcookie("username", $this -> username);
