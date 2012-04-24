@@ -37,7 +37,7 @@ if (!file_exists($settingsFile)) {
          		"username VARCHAR(100)," .
          		"email VARCHAR(200)," .
          		"firstname VARCHAR(100)," .
-         		"leastname VARCHAR(100)," .
+         		"lastname VARCHAR(100)," .
          		"password VARCHAR(100)," . //this is supposed to be a hashed value
          		"salt VARCHAR(100)," . //this is supposed to be a hashed value
          		"validationkey VARCHAR(100)," .

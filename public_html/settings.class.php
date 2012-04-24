@@ -1,17 +1,17 @@
 <?php
 
 class settings {
-	private $filename;
+	private static $filename;
 
-	private $name;
-	private $tagline;
-	private $dbhost;
-	private $dbuser;
-	private $dbpw;
-	private $dbname;
-	private $dbprefix;
+	private static $name;
+	private static $tagline;
+	private static $dbhost;
+	private static $dbuser;
+	private static $dbpw;
+	private static $dbname;
+	private static $dbprefix;
 
-	private $database;
+	private static $database;
 
 	function __construct($filename, $name=null, $tagline=null, $dbhost=null, $dbuser=null, $dbpw=null, $dbname=null, $dbprefix=null) {
 		$this -> filename = $filename;
@@ -47,15 +47,15 @@ class settings {
 		$dbprefix = utf8_decode($xml -> database -> prefix);
 	}
 
-	public function getDatabase() {
+	public static function getDatabase() {
 		return $this -> database;
 	}
 
-	public function getDbPrefix() {
+	public static function getDbPrefix() {
 		return $this -> dbprefix;
 	}
 
-	public function createSettings() {
+	private function createSettings() {
 		$xml_ny = "<settings>\n" . 
 			"\t<name>$this->name</name>\n" .
 			"\t<tagline>$this->name</tagline>\n" .

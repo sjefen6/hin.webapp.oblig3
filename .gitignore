@@ -1,3 +1,4 @@
+.DS_Store
 .settings
 cgi-bin
 public_html/templates_c*
