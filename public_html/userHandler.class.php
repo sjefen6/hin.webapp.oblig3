@@ -148,6 +148,21 @@ class user {
 		}
 		return false;
 	}
+	
+	private function sendRegisterValidation(){
+		$to  = $this->email;
+		$url = $_SERVER['HTTP_HOST']."/?user=" . $this -> username . "&vkey=" . $this->validationkey;
+		
+		$subject = "E-post validering kc blogg";
+		
+		$message = "Open this url to validate your e-mail adress: " . $url;
+		
+		$headers = 'From: noreply@'. $_SERVER['SERVER_NAME'] . "\r\n" .
+		'Reply-To: noreply@'. $_SERVER['SERVER_NAME'] . "\r\n" .
+		'X-Mailer: PHP/' . phpversion();
+		
+		mail($to, $subject, $message, $headers);
+	}
 
 	private function random_gen($length) {
 		// Source: http://deepakssn.blogspot.com/2006/06/php-random-string-generator-function.html
