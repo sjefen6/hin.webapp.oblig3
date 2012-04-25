@@ -46,12 +46,14 @@ $smarty->assign('menu',$menu->getMenuArray());
 /*
  * Login subutine
 */
+// $user = $users -> getCurrentUser();
 $admin = false;
 $failed = false;
 $users = new userHandler("../users.xml");
 
-if ($users -> verifySession()){
+if ($users -> verifySession() != false){
 	$admin = true;
+	
 }
 
 if (isset($_GET["login"])){

@@ -4,15 +4,20 @@ class userHandler {
 	private $userArray;
 
 	function __construct() {
-		/*** The SQL SELECT statement ***/
-		$sql = "SELECT id, username, email, firstname, lastname, password, salt, validationkey, session_cookie, usermode, userlevel FROM " . settings::getDbPrefix() . "users";
+		/*
+		 * SQL Query 
+		 */
+		$sql = "SELECT * FROM " . settings::getDbPrefix() . "users";
 
-		/*** fetch into an PDOStatement object ***/
+		/*
+		 * Prepare and execute the sql query 
+		 */
 		$stmt = settings::getDatabase() -> prepare($sql);
-		
 		$stmt->execute();
 
-		/*** fetch into the animals class ***/
+		/*
+		 * Fetch into the userArray 
+		 */
 		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'user');
 	}
 
@@ -40,7 +45,9 @@ class userHandler {
 // 			echo $username . $session_cookie;
 			foreach ($this->userArray as $user) {
 				if ($user -> getUsername() == $username) {
-					return $user -> verifySessionCookie($session_cookie);
+					if ($user -> verifySessionCookie($session_cookie)){
+						return $user;
+					}
 				}
 			}
 		}
@@ -59,17 +66,17 @@ class userHandler {
 }
 
 class user {
-	public $id;
-	public $username;
-	public $email;
-	public $firstname;
-	public $lastname;
-	public $password;
-	public $salt;
-	public $validationkey;
-	public $session_cookie;
-	public $usermode;
-	public $userlevel;
+	private $id;
+	private $username;
+	private $email;
+	private $firstname;
+	private $lastname;
+	private $password;
+	private $salt;
+	private $validationkey;
+	private $session_cookie;
+	private $usermode;
+	private $userlevel;
 
 	function __construct($username = null, $email = null, $firstname = null, $lastname = null, $password = null, $userlevel = null, $usermode = null) {
 		if ($username != null || $email != null || $firstname != null || $lastname != null || $password != null || $userlevel != null || $usermode != null) {
@@ -154,7 +161,16 @@ class user {
 
 		/*** run the query ***/
 		if ($new) {
-			$stmt -> execute(array(':username' => $this -> username, ':email' => $this -> email, ':firstname' => $this -> firstname, ':lastname' => $this -> lastname, ':password' => $this -> password, ':salt' => $this -> salt, ':validationkey' => $this -> validationkey, ':session_cookie' => $this -> session_cookie, ':usermode' => $this -> usermode, ':userlevel' => $this -> userlevel));
+			$stmt -> execute(array(':username' => $this -> username,
+					':email' => $this -> email,
+					':firstname' => $this -> firstname,
+					':lastname' => $this -> lastname,
+					':password' => $this -> password,
+					':salt' => $this -> salt,
+					':validationkey' => $this -> validationkey,
+					':session_cookie' => $this -> session_cookie,
+					':usermode' => $this -> usermode,
+					':userlevel' => $this -> userlevel));
 		} else {
 			$stmt -> execute(array(':username' => $this -> username, ':email' => $this -> email, ':firstname' => $this -> firstname, ':lastname' => $this -> lastname, ':password' => $this -> password, ':salt' => $this -> salt, ':validationkey' => $this -> validationkey, ':session_cookie' => $this -> session_cookie, ':usermode' => $this -> usermode, ':userlevel' => $this -> userlevel, ':id' => $this -> id));
 		}

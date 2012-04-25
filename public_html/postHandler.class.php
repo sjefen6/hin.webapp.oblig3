@@ -1,21 +1,24 @@
 <?php
 class postHandler{
 	private $postArray;
-//	private $filename;
 
 	/** Se userHAndler.class.php*/
 	function __construct($settings) {
-//		$this->postArray = array();
-//		$this->filename = $filename;
-//		$this->readFile();
+		/*
+		 * SQL Query 
+		 */
+		$sql = "SELECT * FROM " . settings::getDbPrefix() . "posts";
 
-		$sql = "SELECT * FROM " . settings::getDbPrefix(). "posts";
-		
-		/*** fetch into an PDOStatement object ***/
-		$stmt = settings::getDatabase() -> query($sql);
+		/*
+		 * Prepare and execute the sql query 
+		 */
+		$stmt = settings::getDatabase() -> prepare($sql);
+		$stmt->execute();
 
-		/*** fetch into the animals class ***/
-		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'posts');
+		/*
+		 * Fetch into the userArray 
+		 */
+		$this -> postArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'post');
 	}
 
 //	private function readFile(){
@@ -41,7 +44,7 @@ class postHandler{
 	}
 
 	public function getPosts($from, $to){
-		/* Hent ut post med $id og overfï¿½r den til Smarty  */
+		/* Hent ut post med $id og overf¿r den til Smarty  */
 		
 		$returnArray = array();
 
@@ -49,18 +52,18 @@ class postHandler{
 			return false;
 		}
 		$counter = 0;
-		while($row = mysql_fetch_array($postArray)){
-			if($counter < $from){
-				// Not yet at $from
+		foreach ($this->postArray as $post) {
+			if ($counter < $from){
+				// We are not yet at $from
 				;
-			} else if($counter > $to){
-				// Passed $from
+			} else if ($counter > $to) {
+				// We have passed $to
 				return $postArray;
-			} else{
-				$returnArray[] = array('id'=>$post['id'], 
-						'title'=>$post['title'],
-						'time'=>date("r",$post['time']),
-						'content'=>$post['content']);
+			} else {
+				$returnArray[] = array('id' => $post->getId(),
+						'title' => $post->getTitle(),
+						'time' => date("r", $post->getTime()),
+						'desc' => $post->getContent());
 			}
 			$counter++;
 		}
@@ -68,29 +71,9 @@ class postHandler{
 		return $returnArray;
 	}
 	
-	public function addPost($id, $title, $desc, $a_id){
-		$this->postArray[] = new post($id, $title, time(), $desc, $a_id);
+	public function addPost($title, $url_id, $time, $author_id, $content){
+		$this->postArray[] = new post($title, $title, time(), $desc, $a_id);
 	}
-
-//	public function save() {
-//		$this->sortPosts();
-//		
-//		$xml_ny = "<blogposts>";
-//		foreach ($this->postArray as $post) {
-//			$xml_ny .=  "<post>\n".
-//	                    "<id>" . utf8_encode($post->getId()). "</id>\n" .
-//	                    "<title>" .utf8_encode($post->getTitle()). "</title>\n" .
-//	                    "<time>" .utf8_encode($post->getTime()). "</time>\n" .
-//	                    "<description><![CDATA[" .utf8_encode($post->getDesc()). "]]></description>\n" . 
-//	                    "</post>\n";
-//		}
-//		$xml_ny .= "</blogposts>";
-//
-//		$xml = simplexml_load_string($xml_ny);
-//
-//		// Lagre endrede XML data til fil, skrivekasess til fil nï¿½dvendig for apache web tjener
-//		file_put_contents($this->filename,$xml->asXML());
-//	}
 	
 	public function sortPosts(){
 		usort($this -> postArray, array($this, 'sortByTime'));
@@ -108,20 +91,23 @@ class postHandler{
 }
 
 class post{
-	private $url_id;
+	private $id;
 	private $title;
+	private $url_id;
 	private $time;
-	private $content;
 	private $author_id;
+	private $content;
 
-	function __construct($url_id, $title, $time, $desc, $a_id) {
-		$this->url_id = $url_id;
-		$this->title = $title;
-		$this->time = $time;
-		$this->content = $desc;
-		$this->author_id = $a_id;
-		
-		$this->save(true);
+	function __construct($title=null, $url_id=null, $time=null, $author_id=null, $content=null) {
+		if ($title != null || $url_id != null || $time != null || $author_id != null || $content != null) { 
+			$this->title = $title;
+			$this->url_id = $url_id;
+			$this->time = $time;
+			$this->author_id = $author_id;
+			$this->content = $content;
+			
+			$this->save(true);
+		}
 	}
 
 	public function getId(){
@@ -167,12 +153,12 @@ class post{
 								':author_id'=>$this -> author_id,
 								':content'=>$this -> content));
 		} else {
-			$stmt -> execute(array(':id'=>$this -> id,
-								':title'=>$this -> title,
+			$stmt -> execute(array(':title'=>$this -> title,
 								':url_id'=>$this -> url_id,
 								':time'=>$this -> time,
 								':author_id'=>$this -> author_id,
-								':content'=>$this -> content));
+								':content'=>$this -> content,
+								':id'=>$this -> id,));
 		}
 	}
 }

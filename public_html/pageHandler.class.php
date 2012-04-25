@@ -4,14 +4,21 @@ class pageHandler{
 	private $pageArray;
 
 	function __construct($filename) {
-		/*** The SQL SELECT statement ***/
+		/*
+		 * SQL Query 
+		 */
 		$sql = "SELECT * FROM " . settings::getDbPrefix() . "pages";
 
-		/*** fetch into an PDOStatement object ***/
-		$stmt = settings::getDatabase() -> query($sql);
+		/*
+		 * Prepare and execute the sql query 
+		 */
+		$stmt = settings::getDatabase() -> prepare($sql);
+		$stmt->execute();
 
-		/*** fetch into the animals class ***/
-		$this -> pageArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'pages');
+		/*
+		 * Fetch into the userArray 
+		 */
+		$this -> pageArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'page');
 	}
 
 //	private function readFile(){
