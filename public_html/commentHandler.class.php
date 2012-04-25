@@ -8,6 +8,7 @@ class commentHandler{
 		
 		/*** fetch into an PDOStatement object ***/
 		$stmt = settings::getDatabase() -> query($sql);
+		$stmt->execute();
 
 		/*** fetch into the animals class ***/
 		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'comments');
