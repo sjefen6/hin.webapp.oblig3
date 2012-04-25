@@ -49,6 +49,14 @@ class settings {
 		self::$dbprefix = utf8_decode($xml -> database -> prefix);
 	}
 
+	public static function getName() {
+		return self::$name;
+	}
+
+	public static function getTagline() {
+		return self::$tagline;
+	}
+	
 	public static function getDatabase() {
 		return self::$database;
 	}

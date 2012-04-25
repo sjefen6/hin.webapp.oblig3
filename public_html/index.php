@@ -25,8 +25,8 @@ $smarty->assign("mode","default");
 /*
  * Litt info om nettsiden
 */
-$smarty->assign("title","Dette er overskriften",true);
-$smarty->assign("subtitle","Dette er under-overskriften",true);
+$smarty->assign("title",settings::getName());
+$smarty->assign("subtitle",settings::getTagline());
 
 /*
  * Opprett Menyen
@@ -56,12 +56,14 @@ $failed = false;
 
 if ($user == "failed"){
 	$failed =  true;
+	$smarty->assign("userLevel", 200);
 } else if ($user != null && $user -> getUserlevel() < 50){
+	$smarty->assign("userLevel", $user -> getUserlevel());
 	$admin = true;
-}
+} 
 
 $smarty->assign("failed", $failed);
-$smarty->assign("signedIn", $admin);
+$smarty->assign("userLevel", ($user));
 
 /*
  * Main content switch
@@ -82,8 +84,8 @@ if (isset($_GET["page"])) {
 	} else {
 		header("Status: 404 Not Found");
 	}
-} else if (isset($_GET["admin"])) {
-	if ($_GET["admin"] == "addPage" && $admin){
+} else if (isset($_GET["admin"]) && $user -> getUserlevel() < 50) {
+	if ($_GET["admin"] == "addPage"){
 		if (isset($_POST["title"])){
 			if ($pages->addPage($_POST["title"],$_POST["id"],$user -> getId(),$_POST["desc"])){
 				$smarty->assign("mode","added");
@@ -93,7 +95,7 @@ if (isset($_GET["page"])) {
 		} else {
 			$smarty->assign("mode","addPage");
 		}
-	} else if ($_GET["admin"] == "addPost" && $admin){
+	} else if ($_GET["admin"] == "addPost"){
 		if (isset($_POST["title"])){
 			if ($posts->addPost($_POST["title"], $_POST["id"],$user -> getId(),$_POST["desc"])){
 				$smarty->assign("mode","added");
@@ -103,20 +105,20 @@ if (isset($_GET["page"])) {
 		} else {
 			$smarty->assign("mode","addPost");
 		}
-	} else if ($_GET["admin"] == "newUser"){
-		if (isset($_POST["userName"])){
-			if ($users->addUser($_POST["userName"],$_POST["password"],
-					$_POST["confirmPassword"],$_POST["firstName"],
-					$_POST["lastName"],$_POST["email"])){
-				$smarty->assign("mode","userAdded");
-			} else {
-				$smarty->assign("mode","notAdded");
-			}
-		} else {
-			$smarty->assign("mode","newUser");
-		} 
-	}else {
+	} else {
 		header("Status: 404 Not Found");
+	}
+} else if (@$_GET["login"] == "register"){
+	if (isset($_POST["userName"])){
+		if ($users->addUser($_POST["userName"],$_POST["password"],
+				$_POST["confirmPassword"],$_POST["firstName"],
+				$_POST["lastName"],$_POST["email"])){
+			$smarty->assign("mode","userAdded");
+		} else {
+			$smarty->assign("mode","notAdded");
+		}
+	} else {
+		$smarty->assign("mode","newUser");
 	}
 } else {
 	$temp = $posts->getPosts(0, 10);

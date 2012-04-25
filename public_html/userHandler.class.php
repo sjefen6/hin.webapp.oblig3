@@ -23,7 +23,7 @@ class userHandler {
 	
 	public function getCurrentUser(){
 		if (isset($_GET["login"])) {
-			if ($_GET["login"] == "new"){
+			if ($_GET["login"] == "register"){
 				if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"]) && isset($_POST["userName"]) && isset($_POST["password"])){
 					if ($_POST["confirmPassword"] === $_POST["password"]){
 						if ($this -> getUser($_POST["userName"]) == NULL){
