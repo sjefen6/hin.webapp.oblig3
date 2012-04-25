@@ -43,6 +43,14 @@ class pageHandler{
 		}
 		return false;	
 	}
+	
+	public function getRealPage($id) {
+		/* Hent ut post med $id og overf�r den til Smarty  */
+		foreach ($this->pageArray as $page) {
+			return $page;
+		}
+		return false;	
+	}
 
 	public function addToMenu($menu){
 		foreach ($this->pageArray as $page){

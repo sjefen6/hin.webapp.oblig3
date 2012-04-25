@@ -74,6 +74,9 @@ $smarty->assign("failed", $failed);
 if (isset($_GET["page"])) {
 	$temp = $pages->getPage($_GET["page"], $comments, $users);
 	if ($temp != false){
+		if (isset($_POST["comment"])){
+			$comments ->addComment(null, $pages->getRealPage($_GET["page"]), $_POST["comment"], $user -> getId());
+		}
 		$smarty->assign("mode","page");
 		$smarty->assign("page", $temp);
 	} else {
@@ -82,6 +85,9 @@ if (isset($_GET["page"])) {
 } else if (isset($_GET["post"])) {
 	$temp = $posts->getPost($_GET["post"], $comments, $users);
 	if ($temp != false){
+		if (isset($_POST["comment"])){
+			$comments ->addComment($posts->getRealPost($_GET["post"]), null, $_POST["comment"], $user -> getId());
+		}
 		$smarty->assign("mode","post");
 		$smarty->assign("post", $temp);
 	} else {

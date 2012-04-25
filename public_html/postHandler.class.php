@@ -43,6 +43,14 @@ class postHandler{
 		}
 		return false;
 	}
+		
+	public function getRealPost($id) {
+		/* Hent ut post med $id og overfï¿½r den til Smarty  */
+		foreach ($this->postArray as $post) {
+			return $post;
+		}
+		return false;	
+	}
 
 	public function getPosts($from, $to){
 		/* Hent ut post med $id og overf¿r den til Smarty  */
