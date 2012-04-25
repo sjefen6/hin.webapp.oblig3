@@ -31,7 +31,7 @@ class pageHandler{
 	
 	//TODO: fix?
 	public function getPage($id) {
-		/* Hent ut post med $id og overf¿r den til Smarty  */
+		/* Hent ut post med $id og overfï¿½r den til Smarty  */
 		foreach ($this->pageArray as $page) {
 			if ($id == $page->getId()) {
 				$pageArray = array('title' => $page->getTitle(),
@@ -53,25 +53,6 @@ class pageHandler{
 	public function addPage($id, $title, $desc){
 		$this->pageArray[] = new page($id, $title, time(), $desc);
 	}
-	
-//	public function save() {
-//	
-//		$xml_ny = "<pages>";
-//		foreach ($this->pageArray as $page) {
-//			$xml_ny .=  "<page>\n".
-//		                    "<id>" . utf8_encode($page->getId()). "</id>\n" .
-//		                    "<title>" .utf8_encode($page->getTitle()). "</title>\n" .
-//		                    "<time>" .utf8_encode($page->getTime()). "</time>\n" .
-//		                    "<description><![CDATA[" .utf8_encode($page->getDesc()). "]]></description>\n" . 
-//		                    "</page>\n";
-//		}
-//		$xml_ny .= "</pages>";
-//	
-//		$xml = simplexml_load_string($xml_ny);
-//	
-//		// Lagre endrede XML data til fil, skrivekasess til fil nødvendig for apache web tjener
-//		file_put_contents($this->filename,$xml->asXML());
-//	}
 }
 
 class page{

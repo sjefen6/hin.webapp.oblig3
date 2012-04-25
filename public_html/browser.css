@@ -128,6 +128,26 @@ footer{
 	float: right;
 }
 
+#comments{
+	padding-left: 15px;
+	padding-top: 5px;
+	background-color: #6699FF;
+}
+
+.comment {
+	padding-bottom: 15px;
+}
+
+.comment h1{
+	font-size: 18px;
+	font-weight: bold;
+	background-color: #CCCCCC;
+}
+
+.comment p{
+	background-color: #FFFFFF;
+}
+
 article{
 	padding-bottom: 15px;
 }
