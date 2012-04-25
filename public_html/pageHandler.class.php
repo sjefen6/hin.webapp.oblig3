@@ -50,8 +50,8 @@ class pageHandler{
 		return $menu;
 	}
 	
-	public function addPage($id, $title, $desc){
-		$this->pageArray[] = new page($id, $title, time(), $desc);
+	public function addPage($id, $title, $author_id, $desc){
+		$this->pageArray[] = new page($id, $title, time(), $author_id, $desc);
 	}
 }
 

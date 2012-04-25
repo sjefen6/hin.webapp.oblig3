@@ -97,6 +97,10 @@ class user {
 		return $this -> userlevel;
 	}
 	
+	public function getId() {
+		return $this -> id;
+	}
+	
 	public function getUsername() {
 		return $this -> username;
 	}
@@ -151,9 +155,26 @@ class user {
 	private function save($new = false) {
 		/*** The SQL SELECT statement ***/
 		if ($new) {
-			$sql = "INSERT INTO " . settings::getDbPrefix() . "users " . "(username, email, firstname, lastname, password, salt, validationkey, session_cookie, usermode, userlevel) " . "VALUES (:username, :email, :firstname, :lastname, :password, :salt, :validationkey, :session_cookie, :usermode, :userlevel);";
+			$sql = "INSERT INTO " . settings::getDbPrefix() . "users " .
+			"(username, email, firstname, lastname, " .
+			"password, salt, validationkey, session_cookie, " .
+			"usermode, userlevel) " .
+			"VALUES (:username, :email, :firstname, :lastname, " .
+			":password, :salt, :validationkey, :session_cookie, " .
+			":usermode, :userlevel);";
 		} else {
-			$sql = "UPDATE " . settings::getDbPrefix() . "users " . "SET username = :username, email = :email, firstname = :firstname, lastname = :lastname, " . "password = :password, salt = :salt, validationkey = :validationkey, session_cookie = :session_cookie, " . "usermode = :usermode, userlevel = :userlevel " . "WHERE id = :id";
+			$sql = "UPDATE " . settings::getDbPrefix() . "users " .
+			"SET username = :username, " .
+			"email = :email, " .
+			"firstname = :firstname, " .
+			"lastname = :lastname, " .
+			"password = :password, " .
+			"salt = :salt, " .
+			"validationkey = :validationkey, " .
+			"session_cookie = :session_cookie, " .
+			"usermode = :usermode, " .
+			"userlevel = :userlevel " .
+			"WHERE id = :id";
 		}
 
 		/*** fetch into an PDOStatement object ***/
@@ -172,7 +193,17 @@ class user {
 					':usermode' => $this -> usermode,
 					':userlevel' => $this -> userlevel));
 		} else {
-			$stmt -> execute(array(':username' => $this -> username, ':email' => $this -> email, ':firstname' => $this -> firstname, ':lastname' => $this -> lastname, ':password' => $this -> password, ':salt' => $this -> salt, ':validationkey' => $this -> validationkey, ':session_cookie' => $this -> session_cookie, ':usermode' => $this -> usermode, ':userlevel' => $this -> userlevel, ':id' => $this -> id));
+			$stmt -> execute(array(':username' => $this -> username,
+					':email' => $this -> email,
+					':firstname' => $this -> firstname,
+					':lastname' => $this -> lastname,
+					':password' => $this -> password,
+					':salt' => $this -> salt,
+					':validationkey' => $this -> validationkey,
+					':session_cookie' => $this -> session_cookie,
+					':usermode' => $this -> usermode,
+					':userlevel' => $this -> userlevel,
+					':id' => $this -> id));
 		}
 	}
 

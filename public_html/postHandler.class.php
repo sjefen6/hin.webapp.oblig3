@@ -71,7 +71,7 @@ class postHandler{
 		return $returnArray;
 	}
 	
-	public function addPost($title, $url_id, $time, $author_id, $content){
+	public function addPost($title, $url_id, $author_id, $content){
 		$this->postArray[] = new post($title, $title, time(), $desc, $a_id);
 	}
 	
@@ -137,7 +137,7 @@ class post{
 			"(title, url_id, time, author_id, content) " . 
 			"VALUES (:title, :url_id, :time, :author_id, :content);";
 		} else {
-			$sql = "UPDATE " . settings::getDbPrefix() . "users " .
+			$sql = "UPDATE " . settings::getDbPrefix() . "posts " .
 			"SET title=:title, url_id=:url_id, time=:time, author_id=:author_id, content=:content " . 
         	"WHERE id=:id";
 		}
@@ -147,18 +147,18 @@ class post{
 
 		/*** fetch into the animals class ***/
 		if ($new){
-			$stmt -> execute(array(':title'=>$this -> title,
-								':url_id'=>$this -> url_id,
-								':time'=>$this -> time,
-								':author_id'=>$this -> author_id,
-								':content'=>$this -> content));
+			$stmt -> execute(array(':title' => $this -> title,
+								':url_id' => $this -> url_id,
+								':time' => $this -> time,
+								':author_id' => $this -> author_id,
+								':content' => $this -> content));
 		} else {
-			$stmt -> execute(array(':title'=>$this -> title,
-								':url_id'=>$this -> url_id,
-								':time'=>$this -> time,
-								':author_id'=>$this -> author_id,
-								':content'=>$this -> content,
-								':id'=>$this -> id,));
+			$stmt -> execute(array(':title' => $this -> title,
+								':url_id' => $this -> url_id,
+								':time' => $this -> time,
+								':author_id' => $this -> author_id,
+								':content' => $this -> content,
+								':id' => $this -> id));
 		}
 	}
 }
