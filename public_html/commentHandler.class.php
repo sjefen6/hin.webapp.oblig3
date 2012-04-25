@@ -1,7 +1,6 @@
 <?php
 class commentHandler{
 	private $commentArray;
-//	private $filename;
 
 	/** Se userHAndler.class.php*/
 	function __construct($settings) {
@@ -14,56 +13,47 @@ class commentHandler{
 		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'comments');
 	}
 	
-	//TODO: fix
-	public function getComment($id){
-		/* Hent ut post med $id og overf�r den til Smarty  */
-		foreach ($this->commentArray as $post) {
-			if ($id == $post->getId()) {
-				$commentArray = array('page_id' => $post->getTitle(),
-					'time' => date("r", $post->getTime()),
-					'content' => $post->getContent());
+	/** Henter ut kommentarer gitt av postId */
+	public function getCommentForPost($postId){
+		foreach ($this->commentArray as $comment) {
+			if ($postId == $comment->getPostId() && $comment->getPageId() == NULL) {
+				$commentArray = array('post_id' => $comment->getPostId(),
+					'page_id' => NULL,
+					'time' => date("r", $comment->getTime()),
+					'author_id' => $comment->getAuthorId(),
+					'content' => $comment->getContent());
 				return $commentArray;
 			}
 		}
 		return false;
 	}
-
-	public function getComments($from, $to){
-		/* Hent ut post med $id og overf�r den til Smarty  */
-		
-		$returnArray = array();
-
-		if ($from > $to){
-			return false;
-		}
-		$counter = 0;
-		while($row = mysql_fetch_array($commentArray)){
-			if($counter < $from){
-				// Not yet at $from
-				;
-			} else if($counter > $to){
-				// Passed $from
+	
+	/** Henter ut kommentarer gitt av pageId */
+	public function getCommentForPage($pageId){
+		foreach ($this->commentArray as $comment) {
+			if ($pageId == $comment->getPageId() && $comment->getPostId() == NULL) {
+				$commentArray = array('post_id' => NULL,
+					'page_id' => $comment->getPageId(),
+					'time' => date("r", $comment->getTime()),
+					'author_id' => $comment->getAuthorId(),
+					'content' => $comment->getContent());
 				return $commentArray;
-			} else{
-				$returnArray[] = array('id'=>$post['id'], 
-						'page_id'=>$post['page_id'],
-						'time'=>date("r",$post['time']),
-						'content'=>$post['content']);
 			}
-			$counter++;
 		}
-		// There are no more posts available
-		return $returnArray;
+		return false;
 	}
 	
-	public function addComment($id, $page_id, $desc, $a_id){
-		$this->commentArray[] = new post($id, $page_id, time(), $desc, $a_id);
+	/** Legger til en ny kommentar. */
+	public function addComment($postid, $page_id, $desc, $a_id){
+		$this->commentArray[] = new post($postid, $page_id, time(), $desc, $a_id);
 	}
 
-	public function sortPosts(){
+	/** Sorterer kommentarene i arrayet etter tid. */
+	public function sortComments(){
 		usort($this -> commentArray, array($this, 'sortByTime'));
 	}
 	
+	/** Hjelpefunksjon for sortering. */
 	private function sortByTime($a, $b) {
 		if ($a->getTime() == $b->getTime()) {
 			return 0;
