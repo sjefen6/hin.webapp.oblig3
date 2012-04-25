@@ -62,14 +62,16 @@ class page{
 	private $author_id;
 	private $content;
 
-	function __construct($post_id, $url_id, $time, $author_id, $desc) {
-		$this->id = $post_id;
-		$this->url_id = $url_id;
-		$this->time = $time;
-		$this->author_id = $author_id;
-		$this->content = $desc;
+	function __construct($post_id=null, $url_id=null, $time=null, $author_id=null, $content=null) {
+		if ($post_id != null || $url_id != null || $time != null || $author_id != null || $content != null) {
+			$this->id = $post_id;
+			$this->url_id = $url_id;
+			$this->time = $time;
+			$this->author_id = $author_id;
+			$this->content = $content;
 		
-		$this->save(true);
+			$this->save(true);
+		}
 	}
 
 	public function getId(){
