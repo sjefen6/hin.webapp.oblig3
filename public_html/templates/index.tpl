@@ -49,7 +49,7 @@
 			<section class="addComment">
 				<form action="?admin=addPost" method="post">
 					<label for="comment">Write a comment here, max 255 signs</label>
-					<textarea rows="10" cols="30" name="comment" required="required" maxlength="255" ></textarea><br>
+					<textarea rows="10" cols="20" name="comment" required="required" maxlength="255" ></textarea><br>
 					<input type="submit" value="Add comment" />
 				</form>
 			</section>
@@ -74,7 +74,7 @@
 			<section class="addComment">
 				<form action="?admin=addPost" method="post">
 					<label for="comment">Write a comment here, max 255 signs</label>
-					<textarea rows="10" cols="30" name="comment" required="required" maxlength="255" ></textarea><br>
+					<textarea rows="10" cols="20" name="comment" required="required" maxlength="255" ></textarea><br>
 					<input type="submit" value="Add comment" />
 				</form>
 			</section>
