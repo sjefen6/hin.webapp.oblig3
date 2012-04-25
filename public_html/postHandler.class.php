@@ -33,10 +33,10 @@ class postHandler{
 	public function getPost($id){
 		/* Hent ut post med $id og overf�r den til Smarty  */
 		foreach ($this->postArray as $post) {
-			if ($id == $post->getId()) {
+			if ($id == $post->getUrlId()) {
 				$postArray = array('title' => $post->getTitle(),
 					'time' => date("r", $post->getTime()),
-					'content' => $post->getContent());
+					'desc' => $post->getContent());
 				return $postArray;
 			}
 		}
@@ -60,7 +60,7 @@ class postHandler{
 				// We have passed $to
 				return $postArray;
 			} else {
-				$returnArray[] = array('id' => $post->getId(),
+				$returnArray[] = array('id' => $post->getUrlId(),
 						'title' => $post->getTitle(),
 						'time' => date("r", $post->getTime()),
 						'desc' => $post->getContent());
@@ -96,8 +96,12 @@ class post{
 			$this->save(true);
 		}
 	}
-
+	
 	public function getId(){
+		return $this->id;
+	}
+
+	public function getUrlId(){
 		return $this->url_id;
 	}
 
@@ -108,13 +112,13 @@ class post{
 	public function getTime(){
 		return $this->time;
 	}
-
-	public function getContent(){
-		return $this->content;
-	}
 	
 	public function getAuthorId(){
 		return $this->author_id;
+	}
+
+	public function getContent(){
+		return $this->content;
 	}
 	
 	private function save($new = false){

@@ -33,10 +33,10 @@ class pageHandler{
 	public function getPage($id) {
 		/* Hent ut post med $id og overf�r den til Smarty  */
 		foreach ($this->pageArray as $page) {
-			if ($id == $page->getId()) {
+			if ($id == $page->getUrlId()) {
 				$pageArray = array('title' => $page->getTitle(),
 				'time' => date("r", $page->getTime()),
-				'content' => $page->getContent());
+				'desc' => $page->getContent());
 				return $pageArray;
 			}
 		}
@@ -50,8 +50,9 @@ class pageHandler{
 		return $menu;
 	}
 	
-	public function addPage($id, $title, $author_id, $desc){
-		$this->pageArray[] = new page($id, $title, time(), $author_id, $desc);
+	public function addPage($title, $id, $author_id, $desc){
+		$this->pageArray[] = new page($title, $id, time(), $author_id, $desc);
+		return true;
 	}
 }
 
@@ -79,8 +80,12 @@ class page{
 		return $this->id;
 	}
 	
-	public function getPageId(){
+	public function getUrlId(){
 		return $this->url_id;
+	}
+	
+	public function getTitle(){
+		return $this->title;
 	}
 	
 	public function getTime(){
@@ -92,12 +97,12 @@ class page{
 	}
 	
 	public function getContent(){
-		return $this->description;
+		return $this->content;
 	}
 	
 	//TODO: fix
 	public function getMenuItem(){
-		return new menuItem("?page=" . $this->id, $this->title);
+		return new menuItem("?page=" . $this->url_id, $this->title);
 	}
 	
 	private function save($new = false){
