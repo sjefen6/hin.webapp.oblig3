@@ -14,10 +14,6 @@ class userHandler {
 
 		/*** fetch into the animals class ***/
 		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'user');
-		
-		echo "var_dump:\n";
-		var_dump($this -> userArray);
-		echo "var_dump ended\n";
 	}
 
 	// private function readFile() {
@@ -29,9 +25,7 @@ class userHandler {
 	// }
 
 	public function verifyLogin($username, $password) {
-		echo $username . " " . $password;
 		foreach ($this->userArray as $user) {
-			echo "!!!" . $user -> getUsername() . "!!!";
 			if ($user -> getUsername() == $username) {
 				return $user -> verifyPasword($password);
 			}
@@ -41,11 +35,12 @@ class userHandler {
 
 	public function verifySession() {
 		if (isset($_COOKIE["username"]) && isset($_COOKIE["session_cookie"])) {
-			$userId = $_COOKIE["username"];
-			$sessionCookie = $_COOKIE["session_cookie"];
+			$username = $_COOKIE["username"];
+			$session_cookie = $_COOKIE["session_cookie"];
+// 			echo $username . $session_cookie;
 			foreach ($this->userArray as $user) {
-				if ($user -> getUserId() == $userId) {
-					return $user -> verifySessionCookie($sessionCookie);
+				if ($user -> getUsername() == $username) {
+					return $user -> verifySessionCookie($session_cookie);
 				}
 			}
 		}
@@ -77,7 +72,7 @@ class user {
 	public $userlevel;
 
 	function __construct($username = null, $email = null, $firstname = null, $lastname = null, $password = null, $userlevel = null, $usermode = null) {
-		if ($username == null || $email == null || $firstname == null || $lastname == null || $password == null || $userlevel == null || $usermode == null) {
+		if ($username != null || $email != null || $firstname != null || $lastname != null || $password != null || $userlevel != null || $usermode != null) {
 			// Lets fill thows fields that needs some random stuff
 			$this -> salt = $this -> random_gen(30);
 			$this -> session_cookie = $this -> random_gen(30);
@@ -104,9 +99,9 @@ class user {
 	}
 
 	public function verifyPasword($password) {
-		echo $password . $this -> salt;
 		if ($this -> password === sha1($password . $this -> salt)) {
-			$this -> session_cookie = random_gen(30);
+			$this -> session_cookie = $this -> random_gen(30);
+			$this -> save();
 			setcookie("username", $this -> username);
 			setcookie("session_cookie", $this -> session_cookie);
 			return true;
@@ -151,17 +146,17 @@ class user {
 		if ($new) {
 			$sql = "INSERT INTO " . settings::getDbPrefix() . "users " . "(username, email, firstname, lastname, password, salt, validationkey, session_cookie, usermode, userlevel) " . "VALUES (:username, :email, :firstname, :lastname, :password, :salt, :validationkey, :session_cookie, :usermode, :userlevel);";
 		} else {
-			$sql = "UPDATE " . settings::getDbPrefix() . "users " . "SET username=:username, email=:email, firstname=:firstname, lastname=:lastname, " . "password=:password, salt=:salt, validationkey=:validationkey, session_cookie=:session_cookie, " . "usermode=:usermode, userlevel=:userlevel " . "WHERE id=:id";
+			$sql = "UPDATE " . settings::getDbPrefix() . "users " . "SET username = :username, email = :email, firstname = :firstname, lastname = :lastname, " . "password = :password, salt = :salt, validationkey = :validationkey, session_cookie = :session_cookie, " . "usermode = :usermode, userlevel = :userlevel " . "WHERE id = :id";
 		}
 
 		/*** fetch into an PDOStatement object ***/
 		$stmt = settings::getDatabase() -> prepare($sql);
 
-		/*** fetch into the animals class ***/
+		/*** run the query ***/
 		if ($new) {
 			$stmt -> execute(array(':username' => $this -> username, ':email' => $this -> email, ':firstname' => $this -> firstname, ':lastname' => $this -> lastname, ':password' => $this -> password, ':salt' => $this -> salt, ':validationkey' => $this -> validationkey, ':session_cookie' => $this -> session_cookie, ':usermode' => $this -> usermode, ':userlevel' => $this -> userlevel));
 		} else {
-			$stmt -> execute(array(':id' => $this -> id, ':username' => $this -> username, ':email' => $this -> email, ':firstname' => $this -> firstname, ':lastname' => $this -> lastname, ':password' => $this -> password, ':salt' => $this -> salt, ':validationkey' => $this -> validationkey, ':session_cookie' => $this -> session_cookie, ':usermode' => $this -> usermode, ':userlevel' => $this -> userlevel));
+			$stmt -> execute(array(':username' => $this -> username, ':email' => $this -> email, ':firstname' => $this -> firstname, ':lastname' => $this -> lastname, ':password' => $this -> password, ':salt' => $this -> salt, ':validationkey' => $this -> validationkey, ':session_cookie' => $this -> session_cookie, ':usermode' => $this -> usermode, ':userlevel' => $this -> userlevel, ':id' => $this -> id));
 		}
 	}
 
