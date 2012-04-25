@@ -53,7 +53,7 @@ class commentHandler{
 	
 	/** Legger til en ny kommentar. */
 	public function addComment($postid, $page_id, $desc, $a_id){
-		$this->commentArray[] = new post($postid, $page_id, time(), $desc, $a_id);
+		$this->commentArray[] = new comment($postid, $page_id, time(), $desc, $a_id);
 	}
 
 	/** Sorterer kommentarene i arrayet etter tid. */
