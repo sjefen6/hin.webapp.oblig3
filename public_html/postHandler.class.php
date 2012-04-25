@@ -3,7 +3,7 @@ class postHandler{
 	private $postArray;
 
 	/** Se userHAndler.class.php*/
-	function __construct($settings) {
+	function __construct() {
 		/*
 		 * SQL Query 
 		 */

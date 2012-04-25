@@ -3,7 +3,7 @@
 class pageHandler{
 	private $pageArray;
 
-	function __construct($filename) {
+	function __construct() {
 		/*
 		 * SQL Query 
 		 */
