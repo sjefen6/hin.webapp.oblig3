@@ -7,7 +7,7 @@ class postHandler{
 		/*
 		 * SQL Query 
 		 */
-		$sql = "SELECT * FROM " . settings::getDbPrefix() . "posts";
+		$sql = "SELECT * FROM " . settings::getDbPrefix() . "posts ORDER BY time DESC";
 
 		/*
 		 * Prepare and execute the sql query 
@@ -74,20 +74,6 @@ class postHandler{
 	public function addPost($title, $url_id, $author_id, $content){
 		$this->postArray[] = new post($title, $url_id, time(), $author_id, $content);
 		return true;
-	}
-	
-	public function sortPosts(){
-		usort($this -> postArray, array($this, 'sortByTime'));
-	}
-	
-	private function sortByTime($a, $b) {
-		if ($a->getTime() == $b->getTime()) {
-			return 0;
-		} else if ($a->getTime() > $b->getTime()) {
-			return -1;
-		} else {
-			return 1;
-		}
 	}
 }
 
