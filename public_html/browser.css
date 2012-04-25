@@ -139,6 +139,13 @@ footer{
 	padding-left: 20px;
 }
 
+.addComment form textarea{
+	width: 200px;
+	height: 100px;
+	resize: none;
+	overflow: auto;
+}
+
 .comment {
 	padding-bottom: 15px;
 }
