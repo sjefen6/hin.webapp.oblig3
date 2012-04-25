@@ -64,6 +64,13 @@
 			<section class="articleContent">
 			{$page.desc}
 			</section>
+			<section class="addComment">
+				<form action="?admin=addPost" method="post">
+					<label for="comment">Write a comment here, max 255 signs</label>
+					<input type="text" name="comment" required="required" maxlength="255" /> /><br>
+					<input type="submit" value="Add comment" />
+				</form>
+			</section>
 			<section class="comments">
 				{foreach from=$comments item=comment}
 					<div class="comment">

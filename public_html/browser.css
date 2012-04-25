@@ -134,6 +134,11 @@ footer{
 	background-color: #6699FF;
 }
 
+.addComment{
+	padding-top: 10px;
+	padding-left: 20px;
+}
+
 .comment {
 	padding-bottom: 15px;
 }
