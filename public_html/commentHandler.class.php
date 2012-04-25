@@ -35,6 +35,7 @@ class commentHandler{
 	/** Henter ut kommentarer gitt av pageId */
 	public function getCommentsForPage($pageId){
 		foreach ($this->commentArray as $comment) {
+			var_dump($comment);
 			if ($pageId == $comment->getPageId() && $comment->getPostId() == NULL) {
 				$commentArray = array('post_id' => NULL,
 					'page_id' => $comment->getPageId(),
@@ -117,7 +118,7 @@ class comment{
 		if($new) {
 			$sql = "INSERT INTO " . settings::getDbPrefix() . "comments " . 
 			"(page_id, post_id, time, author_id, content) " . 
-			"VALUES (:post_id, :post_id, :time, :author_id, :content);";
+			"VALUES (:page_id, :post_id, :time, :author_id, :content);";
 		} else {
 			$sql = "UPDATE " . settings::getDbPrefix() . "comments " .
 			"SET post_id=:post_id, page_id=:page_id, time=:time, author_id=:author_id, content=:content " . 
