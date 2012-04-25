@@ -19,7 +19,7 @@
 {/foreach}
 	</nav>	
 	
-{if $signedIn}
+{if ($userLevel <= 50)}
 	<nav>
 		<a href="?admin=addPost">Add Post</a>
 		<a href="?admin=addPage">Add Page</a>
@@ -46,6 +46,7 @@
 			<section class="articleContent">
 			{$post.desc}
 			</section>
+			{if ($userLevel <= 100)}
 			<section class="addComment">
 				<form action="?admin=addPost" method="post">
 					<label for="comment">Write a comment here, max 255 signs</label><br>
@@ -53,6 +54,7 @@
 					<input type="submit" value="Add comment" />
 				</form>
 			</section>
+			{/if}
 			<section class="comments">
 				{foreach from=$comments item=comment}
 					<div class="comment">
@@ -71,6 +73,7 @@
 			<section class="articleContent">
 			{$page.desc}
 			</section>
+			{if ($userLevel <= 100)}
 			<section class="addComment">
 				<form action="?admin=addPost" method="post">
 					<label for="comment">Write a comment here, max 255 signs</label><br>
@@ -78,6 +81,7 @@
 					<input type="submit" value="Add comment" />
 				</form>
 			</section>
+			{/if}
 			<section class="comments">
 				{foreach from=$comments item=comment}
 					<div class="comment">
@@ -191,7 +195,7 @@
 	<div id="login">
 		{if $failed}
 			<span>Loggon failed!</span>
-		{elseif $signedIn}
+		{elseif ($userLevel <= 100)}
 			<span>You are <a href="?login=out" alt="Sign Out">signed in</a></span>
 		{else}
 			<form action="" method="post">
