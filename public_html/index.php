@@ -63,7 +63,6 @@ if ($user == "failed"){
 } 
 
 $smarty->assign("failed", $failed);
-$smarty->assign("userLevel", ($user));
 
 /*
  * Main content switch
