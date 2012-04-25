@@ -11,7 +11,7 @@ class commentHandler{
 		$stmt->execute();
 
 		/*** fetch into the animals class ***/
-		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'comments');
+		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'comment');
 	}
 	
 	/** Henter ut kommentarer gitt av postId */
