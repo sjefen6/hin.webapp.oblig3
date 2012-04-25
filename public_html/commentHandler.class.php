@@ -20,7 +20,7 @@ class commentHandler{
 		
 		foreach ($this->commentArray as $comment) {
 			if ($postId == $comment->getPostId() && $comment->getPageId() == NULL) {
-				$user = $users->getUserById($commet->getAuthorId());
+				$user = $users->getUserById($comment->getAuthorId());
 				$tempArray = array('time' => date("r", $comment->getTime()),
 					'author' => $user->getUsername(),
 					'content' => $comment->getContent());
@@ -38,7 +38,7 @@ class commentHandler{
 		foreach ($this->commentArray as $comment) {
 			var_dump($comment);
 			if ($pageId == $comment->getPageId() && $comment->getPostId() == NULL) {
-				$user = $users->getUserById($commet->getAuthorId());
+				$user = $users->getUserById($comment->getAuthorId());
 				$tempArray = array('time' => date("r", $comment->getTime()),
 					'author' => $user->getUsername(),
 					'content' => $comment->getContent());
