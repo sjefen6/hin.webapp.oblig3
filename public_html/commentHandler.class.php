@@ -15,7 +15,7 @@ class commentHandler{
 	}
 	
 	/** Henter ut kommentarer gitt av postId */
-	public function getCommentsForPost($postId){
+	public function getCommentsForPost($postId, $users){
 		$tempArray = array();
 		
 		foreach ($this->commentArray as $comment) {
@@ -32,7 +32,7 @@ class commentHandler{
 	}
 	
 	/** Henter ut kommentarer gitt av pageId */
-	public function getCommentsForPage($pageId){
+	public function getCommentsForPage($pageId, $users){
 		$tempArray = array();
 		
 		foreach ($this->commentArray as $comment) {
