@@ -16,20 +16,19 @@ class commentHandler{
 	
 	/** Henter ut kommentarer gitt av postId */
 	public function getCommentsForPost($postId){
+		$tempArray = array();
+		
 		foreach ($this->commentArray as $comment) {
 			if ($postId == $comment->getPostId() && $comment->getPageId() == NULL) {
-				$commentArray = array('post_id' => $comment->getPostId(),
-					'page_id' => NULL,
-					'time' => date("r", $comment->getTime()),
-					'author_id' => $comment->getAuthorId(),
+				$user = $users->getUserById($commet->getAuthorId());
+				$tempArray = array('time' => date("r", $comment->getTime()),
+					'author' => $user->getUsername(),
 					'content' => $comment->getContent());
 			}
 		}
-		if($commentArray == null){
-			return false;
-		}else{
-			return $commentArray;
-		}
+
+		return $tempArray;
+
 	}
 	
 	/** Henter ut kommentarer gitt av pageId */
@@ -39,10 +38,9 @@ class commentHandler{
 		foreach ($this->commentArray as $comment) {
 			var_dump($comment);
 			if ($pageId == $comment->getPageId() && $comment->getPostId() == NULL) {
-				$tempArray[] = array('post_id' => NULL,
-					'page_id' => $comment->getPageId(),
-					'time' => date("r", $comment->getTime()),
-					'author_id' => $comment->getAuthorId(),
+				$user = $users->getUserById($commet->getAuthorId());
+				$tempArray = array('time' => date("r", $comment->getTime()),
+					'author' => $user->getUsername(),
 					'content' => $comment->getContent());
 				
 			}
