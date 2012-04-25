@@ -80,14 +80,16 @@ class comment{
 	private $content;
 	private $author_id;
 
-	function __construct($post_id, $page_id, $time, $desc, $a_id) {
-		$this->post_id = $post_id;
-		$this->page_id = $page_id;
-		$this->time = $time;
-		$this->content = $desc;
-		$this->author_id = $a_id;
+	function __construct($post_id=null, $page_id=null, $time=null, $desc=null, $a_id=null) {
+		if ($time != null || $a_id != null || $desc != null) {
+			$this->post_id = $post_id;
+			$this->page_id = $page_id;
+			$this->time = $time;
+			$this->content = $desc;
+			$this->author_id = $a_id;
 		
-		$this->save(true);
+			$this->save(true);
+		}
 	}
 
 	public function getPostId(){
