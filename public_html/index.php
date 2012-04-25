@@ -85,7 +85,7 @@ if (isset($_GET["page"])) {
 } else if (isset($_GET["admin"])) {
 	if ($_GET["admin"] == "addPage" && $admin){
 		if (isset($_POST["title"])){
-			if ($pages->addPage($_POST["id"],$_POST["title"],$user -> getId(),$_POST["desc"])){
+			if ($pages->addPage($_POST["title"],$_POST["id"],$user -> getId(),$_POST["desc"])){
 				$smarty->assign("mode","added");
 			} else {
 				$smarty->assign("mode","notAdded");

@@ -95,7 +95,7 @@
 <div id="articles">
 	<article>
 	<h1>Add Page</h1>
-	<form action="?page=addPage" method="post">
+	<form action="?admin=addPage" method="post">
 		<label for="title">Title:</label>
 		<input type="text" name="title" required="required" /><br>
 		<label for="id">Id:</label>
