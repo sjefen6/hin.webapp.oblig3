@@ -34,21 +34,19 @@ class commentHandler{
 	
 	/** Henter ut kommentarer gitt av pageId */
 	public function getCommentsForPage($pageId){
+		$tempArray = array();
+		
 		foreach ($this->commentArray as $comment) {
 			var_dump($comment);
 			if ($pageId == $comment->getPageId() && $comment->getPostId() == NULL) {
-				$commentArray = array('post_id' => NULL,
+				$tempArray[] = array('post_id' => NULL,
 					'page_id' => $comment->getPageId(),
 					'time' => date("r", $comment->getTime()),
 					'author_id' => $comment->getAuthorId(),
 					'content' => $comment->getContent());
 				
 			}
-		}
-		if($commentArray == null){
-			return false;
-		}else{
-			return $commentArray;
+			return $tempArray;
 		}
 	}
 	
