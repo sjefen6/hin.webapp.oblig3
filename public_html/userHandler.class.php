@@ -23,7 +23,19 @@ class userHandler {
 	
 	public function getCurrentUser(){
 		if (isset($_GET["login"])) {
-			$this -> logout();
+			if ($_GET["login"] = "new"){
+				if (isset($_PAGE["firstName"]) && isset($_PAGE["lastName"]) && isset($_PAGE["email"]) && isset($_PAGE["userName"]) && isset($_PAGE["password"])){
+					if ($_PAGE["confirmPassword"] === $_PAGE["password"]){
+						if ($this -> getUser($_PAGE["userName"]) == NULL){
+							$this -> addUser($_PAGE["userName"], $_PAGE["email"], $_PAGE["firstName"], $_PAGE["lastName"], $_PAGE["password"], 100, -1);
+							return $this -> getUser($_PAGE["userName"]);
+						}
+					}
+				}
+				return "failed";
+			} else {
+				$this -> logout();
+			}
 		} else if (isset($_POST["username"])){
 			$user = $this -> getUser($_POST["username"]);
 			if ($user != null && $user -> verifyPasword($_POST["password"])){
