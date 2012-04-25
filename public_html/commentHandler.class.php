@@ -3,7 +3,7 @@ class commentHandler{
 	private $commentArray;
 
 	/** Se userHAndler.class.php*/
-	function __construct($settings) {
+	function __construct() {
 		$sql = "SELECT * FROM " . settings::getDbPrefix(). "comments";
 		
 		/*** fetch into an PDOStatement object ***/
@@ -14,7 +14,7 @@ class commentHandler{
 	}
 	
 	/** Henter ut kommentarer gitt av postId */
-	public function getCommentForPost($postId){
+	public function getCommentsForPost($postId){
 		foreach ($this->commentArray as $comment) {
 			if ($postId == $comment->getPostId() && $comment->getPageId() == NULL) {
 				$commentArray = array('post_id' => $comment->getPostId(),
@@ -22,14 +22,17 @@ class commentHandler{
 					'time' => date("r", $comment->getTime()),
 					'author_id' => $comment->getAuthorId(),
 					'content' => $comment->getContent());
-				return $commentArray;
 			}
 		}
-		return false;
+		if($commentArray == null){
+			return false;
+		}else{
+			return $commentArray;
+		}
 	}
 	
 	/** Henter ut kommentarer gitt av pageId */
-	public function getCommentForPage($pageId){
+	public function getCommentsForPage($pageId){
 		foreach ($this->commentArray as $comment) {
 			if ($pageId == $comment->getPageId() && $comment->getPostId() == NULL) {
 				$commentArray = array('post_id' => NULL,
@@ -37,10 +40,14 @@ class commentHandler{
 					'time' => date("r", $comment->getTime()),
 					'author_id' => $comment->getAuthorId(),
 					'content' => $comment->getContent());
-				return $commentArray;
+				
 			}
 		}
-		return false;
+		if($commentArray == null){
+			return false;
+		}else{
+			return $commentArray;
+		}
 	}
 	
 	/** Legger til en ny kommentar. */
