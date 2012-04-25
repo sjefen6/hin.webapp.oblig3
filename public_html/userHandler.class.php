@@ -23,17 +23,7 @@ class userHandler {
 	
 	public function getCurrentUser(){
 		if (isset($_GET["login"])) {
-			if ($_GET["login"] == "register"){
-				if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"]) && isset($_POST["userName"]) && isset($_POST["password"])){
-					if ($_POST["confirmPassword"] === $_POST["password"]){
-						if ($this -> getUser($_POST["userName"]) == NULL){
-							$this -> addUser($_POST["userName"], $_POST["email"], $_POST["firstName"], $_POST["lastName"], $_POST["password"], 100, -1);
-							return $this -> getUser($_POST["userName"]);
-						}
-					}
-				}
-				return "failed";
-			} else {
+			if ($_GET["login"] == "out"){
 				$this -> logout();
 			}
 		} else if (isset($_POST["username"])){
@@ -63,7 +53,13 @@ class userHandler {
 	}
 
 	public function addUser($username, $email, $firstname, $lastname, $password, $userlevel, $usermode) {
-		$this -> userArray[] = new user($username, $email, $firstname, $lastname, $password, $userlevel, $usermode);
+			if ($_POST["confirmPassword"] === $password){
+				if ($this -> getUser($_POST["userName"]) == NULL){
+					$this -> addUser($username, $email, $firstname, $lastname, $password, $userlevel, $usermode);
+					return $this -> getUser($_POST["userName"]);
+				}
+			}
+		return false;
 	}
 
 	public function logout() {

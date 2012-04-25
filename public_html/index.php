@@ -112,7 +112,7 @@ if (isset($_GET["page"])) {
 	if (isset($_POST["userName"])){
 		if ($users->addUser($_POST["userName"],$_POST["password"],
 				$_POST["confirmPassword"],$_POST["firstName"],
-				$_POST["lastName"],$_POST["email"])){
+				$_POST["lastName"],$_POST["email"], 100, -1)){
 			$smarty->assign("mode","userAdded");
 		} else {
 			$smarty->assign("mode","notAdded");
