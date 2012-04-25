@@ -11,6 +11,7 @@ require('menu.class.php');
 require('pageHandler.class.php');
 require('postHandler.class.php');
 require('userHandler.class.php');
+require('commentHandler.class.php');
 require('settings.class.php');
 
 $settings = new settings("../settings.xml");
@@ -39,6 +40,7 @@ $menu->addItem(new menuItem("/", "Home"));
 */
 $posts = new postHandler();
 $pages = new pageHandler();
+$comments = new commentHandler();
 $menu = $pages->addToMenu($menu);
 
 $smarty->assign('menu',$menu->getMenuArray());
@@ -60,7 +62,9 @@ if ($user == "failed"){
 } else if ($user != null && $user -> getUserlevel() < 50){
 	$smarty->assign("userLevel", $user -> getUserlevel());
 	$admin = true;
-} 
+} else {
+	$smarty->assign("userLevel", 200);
+}
 
 $smarty->assign("failed", $failed);
 
@@ -68,7 +72,7 @@ $smarty->assign("failed", $failed);
  * Main content switch
 */
 if (isset($_GET["page"])) {
-	$temp = $pages->getPage($_GET["page"]);
+	$temp = $pages->getPage($_GET["page"], $comments, $users);
 	if ($temp != false){
 		$smarty->assign("mode","page");
 		$smarty->assign("page", $temp);
@@ -76,14 +80,14 @@ if (isset($_GET["page"])) {
 		header("Status: 404 Not Found");
 	}
 } else if (isset($_GET["post"])) {
-	$temp = $posts->getPost($_GET["post"]);
+	$temp = $posts->getPost($_GET["post"], $comments, $users);
 	if ($temp != false){
 		$smarty->assign("mode","post");
 		$smarty->assign("post", $temp);
 	} else {
 		header("Status: 404 Not Found");
 	}
-} else if (isset($_GET["admin"]) && $user -> getUserlevel() < 50) {
+} else if (isset($_GET["admin"]) && $user != null && $user -> getUserlevel() < 50) {
 	if ($_GET["admin"] == "addPage"){
 		if (isset($_POST["title"])){
 			if ($pages->addPage($_POST["title"],$_POST["id"],$user -> getId(),$_POST["desc"])){

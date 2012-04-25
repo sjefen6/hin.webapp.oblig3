@@ -30,13 +30,14 @@ class pageHandler{
 //	}
 	
 	//TODO: fix?
-	public function getPage($id) {
+	public function getPage($id, $comments, $users) {
 		/* Hent ut post med $id og overf�r den til Smarty  */
 		foreach ($this->pageArray as $page) {
 			if ($id == $page->getUrlId()) {
 				$pageArray = array('title' => $page->getTitle(),
 				'time' => date("r", $page->getTime()),
-				'desc' => $page->getContent());
+				'desc' => $page->getContent(),
+				'comments' => $comments->getCommentsForPage($page -> getId()));
 				return $pageArray;
 			}
 		}

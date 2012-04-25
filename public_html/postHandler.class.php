@@ -30,13 +30,14 @@ class postHandler{
 //	}
 
 	//TODO: fix
-	public function getPost($id){
+	public function getPost($id, $comments, $users){
 		/* Hent ut post med $id og overf�r den til Smarty  */
 		foreach ($this->postArray as $post) {
 			if ($id == $post->getUrlId()) {
 				$postArray = array('title' => $post->getTitle(),
 					'time' => date("r", $post->getTime()),
-					'desc' => $post->getContent());
+					'desc' => $post->getContent(),
+				'comments' => $comments->getCommentsForPage($page -> getId()));
 				return $postArray;
 			}
 		}

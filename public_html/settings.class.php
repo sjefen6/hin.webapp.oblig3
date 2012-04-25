@@ -40,8 +40,8 @@ class settings {
 	private function readFile() {
 		$xml = simplexml_load_file(self::$filename);
 
-		self::$name = utf8_decode($xml -> settings -> name);
-		self::$tagline = utf8_decode($xml -> settings -> tagline);
+		self::$name = utf8_decode($xml -> name);
+		self::$tagline = utf8_decode($xml -> tagline);
 		self::$dbhost = utf8_decode($xml -> database -> host);
 		self::$dbuser = utf8_decode($xml -> database -> user);
 		self::$dbpw = utf8_decode($xml -> database -> password);
