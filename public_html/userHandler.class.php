@@ -51,6 +51,15 @@ class userHandler {
 		}
 		return null;
 	}
+	
+	public function getUserById($id){
+		foreach ($this->userArray as $user) {
+			if ($user -> getId() == $id) {
+				return $user;
+			}
+		}
+		return null;
+	}
 
 	public function addUser($username, $email, $firstname, $lastname, $password, $userlevel, $usermode) {
 			if ($_POST["confirmPassword"] === $password){

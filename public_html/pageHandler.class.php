@@ -37,7 +37,7 @@ class pageHandler{
 				$pageArray = array('title' => $page->getTitle(),
 				'time' => date("r", $page->getTime()),
 				'desc' => $page->getContent(),
-				'comments' => $comments->getCommentsForPage($page -> getId()));
+				'comments' => $comments->getCommentsForPage($page -> getId(), $users));
 				return $pageArray;
 			}
 		}
