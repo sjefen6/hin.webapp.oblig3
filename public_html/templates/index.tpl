@@ -48,7 +48,7 @@
 			</section>
 			<section class="addComment">
 				<form action="?admin=addPost" method="post">
-					<label for="comment">Write a comment here, max 255 signs</label>
+					<label for="comment">Write a comment here, max 255 signs</label><br>
 					<textarea rows="10" cols="20" name="comment" required="required" maxlength="255" ></textarea><br>
 					<input type="submit" value="Add comment" />
 				</form>
@@ -73,7 +73,7 @@
 			</section>
 			<section class="addComment">
 				<form action="?admin=addPost" method="post">
-					<label for="comment">Write a comment here, max 255 signs</label>
+					<label for="comment">Write a comment here, max 255 signs</label><br>
 					<textarea rows="10" cols="20" name="comment" required="required" maxlength="255" ></textarea><br>
 					<input type="submit" value="Add comment" />
 				</form>
@@ -127,7 +127,7 @@
 		<h1>Register here</h1>
 		
 		<div id="registrationform">
-		<form action="?login=new" method="post">
+		<form action="?login=register" method="post">
 			<label for="firstName">First name:</label>
 			<input type="text" name="firstName" required="required" /><br>
 			<label for="lastName">Last name:</label>
@@ -202,7 +202,7 @@
 				<input type="submit" value="Sign In" />
 			</form>
 			<br>
-			<a href="?admin=newUser">Register here</a>
+			<a href="?login=register">Register here</a>
 		{/if}
 	</div>	
 </div>
