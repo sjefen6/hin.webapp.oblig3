@@ -37,8 +37,8 @@ $menu->addItem(new menuItem("/", "Home"));
 /*
  * Les inn alle sidene slik at vi kan generere menyen
 */
-$posts = new postHandler("../blogg.xml");
-$pages = new pageHandler("../pages.xml");
+$posts = new postHandler();
+$pages = new pageHandler();
 $menu = $pages->addToMenu($menu);
 
 $smarty->assign('menu',$menu->getMenuArray());
@@ -46,27 +46,20 @@ $smarty->assign('menu',$menu->getMenuArray());
 /*
  * Login subutine
 */
-// $user = $users -> getCurrentUser();
+$users = new userHandler();
+$user = $users -> getCurrentUser();
+
+var_dump($user);
+
 $admin = false;
 $failed = false;
-$users = new userHandler("../users.xml");
 
-if ($users -> verifySession() != false){
+if ($user == "failed"){
+	$failed =  true;
+} else if ($user -> getUserlevel() > 50){
 	$admin = true;
-	
 }
 
-if (isset($_GET["login"])){
-	if ($_GET["login"] == "in"){
-		$admin = $users->verifyLogin($_POST["userId"], $_POST["password"]);
-		if (!$admin){
-			$failed =  true;
-		}
-	} else {
-		$users -> logout();
-		$admin = false;
-	}
-}
 $smarty->assign("failed", $failed);
 $smarty->assign("signedIn", $admin);
 

@@ -20,38 +20,32 @@ class userHandler {
 		 */
 		$this -> userArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'user');
 	}
-
-	// private function readFile() {
-	// $xml = simplexml_load_file($this -> filename);
-	//
-	// foreach ($xml->user as $user) {
-	// $this -> userArray[] = new user(utf8_decode($user -> userId), utf8_decode($user -> password), utf8_decode($user -> lolSessionCookie));
-	// }
-	// }
-
-	public function verifyLogin($username, $password) {
+	
+	public function getCurrentUser(){
+		if (isset($_POST["username"])){
+			$user = $this -> getUser($_POST["username"]);
+			if ($user -> verifyPasword($_POST["password"])){
+				return $user;
+			} else {
+				return "failed";
+			}
+		} else if (isset($_COOKIE["username"])){
+			$user = $this -> getUser($_COOKIE["username"]);
+			if ($user -> verifySessionCookie($_COOKIE["session_cookie"])){
+				return $user;
+			}
+			
+		}
+		return null;
+	}
+	
+	private function getUser($username){
 		foreach ($this->userArray as $user) {
 			if ($user -> getUsername() == $username) {
-				return $user -> verifyPasword($password);
+				return $user;
 			}
 		}
-		return false;
-	}
-
-	public function verifySession() {
-		if (isset($_COOKIE["username"]) && isset($_COOKIE["session_cookie"])) {
-			$username = $_COOKIE["username"];
-			$session_cookie = $_COOKIE["session_cookie"];
-// 			echo $username . $session_cookie;
-			foreach ($this->userArray as $user) {
-				if ($user -> getUsername() == $username) {
-					if ($user -> verifySessionCookie($session_cookie)){
-						return $user;
-					}
-				}
-			}
-		}
-		return false;
+		return null;
 	}
 
 	public function addUser($username, $email, $firstname, $lastname, $password, $userlevel, $usermode) {
@@ -97,6 +91,10 @@ class user {
 		}
 	}
 
+	public function getUserlevel() {
+		return $this -> userlevel;
+	}
+	
 	public function getUsername() {
 		return $this -> username;
 	}
