@@ -72,7 +72,8 @@ class postHandler{
 	}
 	
 	public function addPost($title, $url_id, $author_id, $content){
-		$this->postArray[] = new post($title, $title, time(), $desc, $a_id);
+		$this->postArray[] = new post($title, $url_id, time(), $author_id, $content);
+		return true;
 	}
 	
 	public function sortPosts(){
