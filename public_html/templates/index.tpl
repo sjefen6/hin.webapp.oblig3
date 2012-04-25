@@ -56,7 +56,7 @@
 			</section>
 			{/if}
 			<section class="comments">
-				{foreach from=$comments item=comment}
+				{foreach from=$post.comments item=comment}
 					<div class="comment">
 						<h1>{$comment.author}, {$comment.time}</h1>
 						{$comment.content}
@@ -83,7 +83,7 @@
 			</section>
 			{/if}
 			<section class="comments">
-				{foreach from=$comments item=comment}
+				{foreach from=$page.comments item=comment}
 					<div class="comment">
 						<h1>{$comment.author}, {$comment.time}</h1>
 						{$comment.content}
