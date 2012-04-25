@@ -23,12 +23,12 @@ class userHandler {
 	
 	public function getCurrentUser(){
 		if (isset($_GET["login"])) {
-			if ($_GET["login"] = "new"){
-				if (isset($_PAGE["firstName"]) && isset($_PAGE["lastName"]) && isset($_PAGE["email"]) && isset($_PAGE["userName"]) && isset($_PAGE["password"])){
-					if ($_PAGE["confirmPassword"] === $_PAGE["password"]){
-						if ($this -> getUser($_PAGE["userName"]) == NULL){
-							$this -> addUser($_PAGE["userName"], $_PAGE["email"], $_PAGE["firstName"], $_PAGE["lastName"], $_PAGE["password"], 100, -1);
-							return $this -> getUser($_PAGE["userName"]);
+			if ($_GET["login"] == "new"){
+				if (isset($_POST["firstName"]) && isset($_POST["lastName"]) && isset($_POST["email"]) && isset($_POST["userName"]) && isset($_POST["password"])){
+					if ($_POST["confirmPassword"] === $_POST["password"]){
+						if ($this -> getUser($_POST["userName"]) == NULL){
+							$this -> addUser($_POST["userName"], $_POST["email"], $_POST["firstName"], $_POST["lastName"], $_POST["password"], 100, -1);
+							return $this -> getUser($_POST["userName"]);
 						}
 					}
 				}
@@ -38,7 +38,7 @@ class userHandler {
 			}
 		} else if (isset($_POST["username"])){
 			$user = $this -> getUser($_POST["username"]);
-			if ($user != null && $user -> verifyPasword($_POST["password"])){
+			if ($user != null && $user -> getUsermode() <= 1 && $user -> verifyPasword($_POST["password"])){
 				return $user;
 			} else {
 				return "failed";
@@ -107,6 +107,10 @@ class user {
 
 	public function getUserlevel() {
 		return $this -> userlevel;
+	}
+	
+	public function getUsermode() {
+		return $this -> usermode;
 	}
 	
 	public function getId() {
