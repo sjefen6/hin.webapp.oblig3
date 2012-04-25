@@ -180,9 +180,9 @@
 		{elseif $signedIn}
 			<span>You are <a href="?login=out" alt="Sign Out">signed in</a></span>
 		{else}
-			<form action="?login=in" method="post">
+			<form action="" method="post">
 				<label for="username">Un:</label>
-				<input type="text" name="userId" id="userId" /><br/>
+				<input type="text" name="username" id="username" /><br/>
 				<label for="password">Pw:</label>
 				<input type="password" name="password" id="password" /><br/>
 				<input type="submit" value="Sign In" />

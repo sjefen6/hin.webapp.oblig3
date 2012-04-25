@@ -49,14 +49,14 @@ $smarty->assign('menu',$menu->getMenuArray());
 $users = new userHandler();
 $user = $users -> getCurrentUser();
 
-var_dump($user);
+//var_dump($user);
 
 $admin = false;
 $failed = false;
 
 if ($user == "failed"){
 	$failed =  true;
-} else if ($user -> getUserlevel() > 50){
+} else if ($user != null && $user -> getUserlevel() < 50){
 	$admin = true;
 }
 

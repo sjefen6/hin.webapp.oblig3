@@ -22,20 +22,22 @@ class userHandler {
 	}
 	
 	public function getCurrentUser(){
-		if (isset($_POST["username"])){
+		if (isset($_GET["login"])) {
+			$this -> logout();
+		} else if (isset($_POST["username"])){
 			$user = $this -> getUser($_POST["username"]);
-			if ($user -> verifyPasword($_POST["password"])){
+			if ($user != null && $user -> verifyPasword($_POST["password"])){
 				return $user;
 			} else {
 				return "failed";
 			}
 		} else if (isset($_COOKIE["username"])){
 			$user = $this -> getUser($_COOKIE["username"]);
-			if ($user -> verifySessionCookie($_COOKIE["session_cookie"])){
+			if ($user != null && $user -> verifySessionCookie($_COOKIE["session_cookie"])){
 				return $user;
 			}
-			
 		}
+		
 		return null;
 	}
 	
