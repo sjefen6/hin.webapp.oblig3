@@ -26,7 +26,7 @@
 	</nav>
 {/if}
 	
-	
+<!-- Standard vising av 10 øverste poster -->	
 {if $mode eq 'bloglist'}
 	<div id="articles">
 		{foreach from=$articles item=article}
@@ -38,6 +38,7 @@
 		</article>
 		{/foreach}
 	</div>
+<!-- For vising av enkeltposter -->
 {elseif $mode eq 'post'}
 	<div id="articles">
 		<article>
@@ -45,8 +46,17 @@
 			<section class="articleContent">
 			{$post.desc}
 			</section>
+			<section class="comments">
+				{foreach from=$comments item=comment}
+					<div class="comment">
+						<h1>{$comment.author}, {$comment.time}</h1>
+						{$comment.content}
+					</div>
+				{/foreach}
+			</section>
 		</article>
 	</div>
+<!-- Vising av enkelt side -->
 {elseif $mode eq 'page'}
 	<div id="articles">
 		<article>
@@ -54,8 +64,17 @@
 			<section class="articleContent">
 			{$page.desc}
 			</section>
+			<section class="comments">
+				{foreach from=$comments item=comment}
+					<div class="comment">
+						<h1>{$comment.author}, {$comment.time}</h1>
+						{$comment.content}
+					</div>
+				{/foreach}
+			</section>
 		</article>
 	</div>
+<!-- Oppretting av nye innlegg -->
 {elseif $mode eq 'addPost'}
 <div id="articles">
 	<article>
@@ -71,6 +90,7 @@
 	</form>
 	</article>
 </div>
+<!-- Oppretting av nye sider -->
 {elseif $mode eq 'addPage'}
 <div id="articles">
 	<article>
@@ -86,6 +106,7 @@
 	</form>
 	</article>
 </div>
+<!-- Registreringsside for nye brukere -->
 {elseif $mode eq 'newUser'}
 <div id="articles">
 	<article>
@@ -115,6 +136,7 @@
 		
 	</article>
 </div>
+<!-- Bekreftelse av ny bruker -->
 {elseif $mode eq 'addedUser'}
 <div id="articles">
 	<article>
@@ -122,6 +144,7 @@
 		<p>An e-mail has been sent to your mail to verify.</p>
 	</article>
 </div>
+<!-- Bekreftelse av nytt innlegg -->
 {elseif $mode eq 'added'}
 <div id="articles">
 	<article>
@@ -129,6 +152,7 @@
 	<p>It was added to the database</p>
 	</article>
 </div>
+<!-- Feilmelding -->
 {elseif $mode eq 'notAdded'}
 <div id="articles">
 	<article>
@@ -136,6 +160,7 @@
 	<p>Something went wrong, please try again.</p>
 	</article>
 </div>
+<!-- 404, siden ikke funnet -->
 {else}
 	<div id="articles">
 		<article>
@@ -146,6 +171,7 @@
 		</article>
 	</div>
 {/if}
+<!-- Right bar -->
 <div id="rightbar">
 	<h2>PLACEHOLDER ARCHIVE</h2>
 	<div id="login">
@@ -155,7 +181,7 @@
 			<span>You are <a href="?login=out" alt="Sign Out">signed in</a></span>
 		{else}
 			<form action="?login=in" method="post">
-				<label for="userId">Un:</label>
+				<label for="username">Un:</label>
 				<input type="text" name="userId" id="userId" /><br/>
 				<label for="password">Pw:</label>
 				<input type="password" name="password" id="password" /><br/>
