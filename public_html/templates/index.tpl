@@ -44,6 +44,7 @@
 	<div id="articles">
 		<article>
 			<h1>{$post.title}</h1>
+			<h2> by {$article.author} - {$article.time}, {$article.no_comments}</h2>
 			<section class="articleContent">
 			{$post.content}
 			</section>
@@ -71,6 +72,7 @@
 	<div id="articles">
 		<article>
 			<h1>{$page.title}</h1>
+			<h2> by {$page.author} - {$page.time}, {$page.no_comments}</h2>
 			<section class="articleContent">
 			{$page.content}
 			</section>
@@ -194,7 +196,7 @@
 <div id="rightbar">
 	<div id="searcher">
 		<form action="" method="get">
-			<label for="search>Search site: </label>
+			<label for="search">Search site: </label>
 			<input type="text" name="search" /><br>
 			<input type="submit" value="Search" />
 		</form>
