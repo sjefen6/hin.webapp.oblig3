@@ -198,6 +198,7 @@
 		</div>
 	{/foreach}
 	</div>
+	<br>
 	<div id="login">
 		{if $failed}
 			<span>Loggon failed!</span>
