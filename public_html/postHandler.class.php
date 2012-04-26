@@ -104,6 +104,10 @@ class postHandler{
 			}
 			$counter++;
 		}
+		// OBOB, legg til den siste i arrayet
+		$returnArray[] = array('title' => $month . " " . $year,
+					'start' => $start,
+					'end' => $end);
 		return $returnArray;
 	}
 }
