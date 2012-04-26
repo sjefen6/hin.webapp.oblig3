@@ -31,7 +31,7 @@
 	<div id="articles">
 		{foreach from=$articles item=article}
 		<article>
-			<a href="?post={$article.id}"><h1>{$article.title}</h1></a>
+			<a href="?post={$article.url_id}"><h1>{$article.title}</h1></a>
 			<section class="articleContent">
 			{$article.desc}
 			</section>
