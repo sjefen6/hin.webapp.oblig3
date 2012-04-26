@@ -32,7 +32,7 @@
 		{foreach from=$articles item=article}
 		<article>
 			<a href="?post={$article.url_id}"><h1>{$article.title}</h1></a>
-			<h2> by {$article.author} - {$article.time}, {$article.no_comments}</h2>
+			<h2> by {$article.author} - {$article.time}, {$article.no_comments} comments</h2>
 			<section class="articleContent">
 			{$article.content}
 			</section>
@@ -44,7 +44,7 @@
 	<div id="articles">
 		<article>
 			<h1>{$post.title}</h1>
-			<h2> by {$post.author} - {$post.time}, {$post.no_comments}</h2>
+			<h2> by {$post.author} - {$post.time}</h2>
 			<section class="articleContent">
 			{$post.content}
 			</section>
@@ -72,7 +72,7 @@
 	<div id="articles">
 		<article>
 			<h1>{$page.title}</h1>
-			<h2> by {$page.author} - {$page.time}, {$page.no_comments}</h2>
+			<h2> by {$page.author} - {$page.time}</h2>
 			<section class="articleContent">
 			{$page.content}
 			</section>
