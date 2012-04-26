@@ -214,7 +214,7 @@ class user {
 						'Reply-To: noreply@'. $_SERVER['SERVER_NAME'] . "\r\n" .
 						'X-Mailer: PHP/' . phpversion();
 						
-			mail($to,$subject,$message,$headers);
+			mail($email,$subject,$message,$headers);
 			
 			$this->setPassword($password);
 			$this->email = $email;

@@ -22,8 +22,8 @@ class commentHandler{
 			if ($postId == $comment->getPostId() && $comment->getPageId() == NULL) {
 				$user = $users->getUserById($comment->getAuthorId());
 				$tempArray[] = array('time' => date("r", $comment->getTime()),
-					'author' => $user->getFirstname() . " " . $user->getLastname(),
-					'content' => $comment->getContent());
+					'author' => htmlentities($user->getFirstname()) . " " . htmlentities($user->getLastname()),
+					'content' => htmlentities($comment->getContent()));
 			}
 		}
 
@@ -39,8 +39,8 @@ class commentHandler{
 			if ($pageId == $comment->getPageId() && $comment->getPostId() == NULL) {
 				$user = $users->getUserById($comment->getAuthorId());
 				$tempArray[] = array('time' => date("r", $comment->getTime()),
-					'author' => $user->getFirstname() . " " . $user->getLastname(),
-					'content' => $comment->getContent());
+					'author' => htmlentities($user->getFirstname()) . " " . htmlentities($user->getLastname()),
+					'content' => htmlentities($comment->getContent()));
 			}
 		}
 		return $tempArray;

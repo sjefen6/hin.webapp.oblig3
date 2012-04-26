@@ -105,8 +105,8 @@
 		<input type="text" name="title" required="required" /><br>
 		<label for="url_id">Url Id:</label>
 		<input type="text" name="url_id" required="required" /><br>
-		<label for="desc">Content:</label><br>
-		<textarea rows="30" cols="100" name="desc" required="required" ></textarea><br>
+		<label for="content">Content:</label><br>
+		<textarea rows="30" cols="100" name="content" required="required" ></textarea><br>
 		<input type="submit" value="Add Post" />
 	</form>
 	</article>
@@ -121,8 +121,8 @@
 		<input type="text" name="title" required="required" /><br>
 		<label for="url_id">Url Id:</label>
 		<input type="text" name="url_id" required="required" /><br>
-		<label for="desc">Content:</label><br>
-		<textarea rows="30" cols="100" name="desc" required="required" ></textarea><br>
+		<label for="content">Content:</label><br>
+		<textarea rows="30" cols="100" name="content" required="required" ></textarea><br>
 		<input type="submit" value="Add Page" />
 	</form>
 	</article>
@@ -181,7 +181,7 @@
 	<p>Something went wrong, please try again.</p>
 	</article>
 </div>
-{elseif $mode eq 'newPW'}
+{elseif $mode eq 'lostpw'}
 <div id="articles">
 	<article>
 		<h1>Enter e-mail and username</h1>
@@ -236,8 +236,8 @@
 				<input type="submit" value="Sign In" />
 			</form>
 			<br>
-			<a href="?login=register">Register here</a>
-			<a href="?login=lostpw">Lost my password</a>
+			<a href="?login=register">Register here</a><br>
+			<a href="?login=lostpw">Lost password?</a>
 		{/if}
 	</div>	
 </div>
