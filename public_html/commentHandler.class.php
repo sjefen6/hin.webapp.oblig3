@@ -4,7 +4,7 @@ class commentHandler{
 
 	/** Se userHAndler.class.php*/
 	function __construct() {
-		$sql = "SELECT * FROM " . settings::getDbPrefix(). "comments ORDER BY time DESC";
+		$sql = "SELECT * FROM " . settings::getDbPrefix(). "comments ORDER BY time ASC";
 		
 		/*** fetch into an PDOStatement object ***/
 		$stmt = settings::getDatabase() -> query($sql);
