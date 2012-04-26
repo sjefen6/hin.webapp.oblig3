@@ -37,7 +37,7 @@ class postHandler{
 				$postArray = array('title' => $post->getTitle(),
 					'time' => date("r", $post->getTime()),
 					'desc' => $post->getContent(),
-				'comments' => $comments->getCommentsForPage($post -> getId(), $users));
+				'comments' => $comments->getCommentsForPost($post -> getId(), $users));
 				return $postArray;
 			}
 		}

@@ -38,14 +38,12 @@ class commentHandler{
 		foreach ($this->commentArray as $comment) {
 			if ($pageId == $comment->getPageId() && $comment->getPostId() == NULL) {
 				$user = $users->getUserById($comment->getAuthorId());
-				var_dump($user->getUsername());
 				$tempArray[] = array('time' => date("r", $comment->getTime()),
 					'author' => $user->getUsername(),
 					'content' => $comment->getContent());
-				
 			}
-			return $tempArray;
 		}
+		return $tempArray;
 	}
 	
 	/** Legger til en ny kommentar. */
