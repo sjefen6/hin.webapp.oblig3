@@ -181,6 +181,19 @@
 	<p>Something went wrong, please try again.</p>
 	</article>
 </div>
+{elseif $mode eq 'newPW'}
+<div id="articles">
+	<article>
+		<h1>Enter e-mail and username</h1>
+		<form action="?login=lostpw" method="post">
+			<label for="username">Username:</label>
+			<input type="text" name="username" required="required" /><br>
+			<label for="email">E-mail</label>
+			<input type="text" name="email" required="required" /><br>
+			<input type="submit" value="Submit" />
+		</form>
+	</article>
+</div>
 <!-- 404, siden ikke funnet -->
 {else}
 	<div id="articles">
@@ -224,6 +237,7 @@
 			</form>
 			<br>
 			<a href="?login=register">Register here</a>
+			<a href="?login=lostpw">Lost my password</a>
 		{/if}
 	</div>	
 </div>
