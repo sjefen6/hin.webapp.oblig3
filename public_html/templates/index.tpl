@@ -32,7 +32,7 @@
 		{foreach from=$articles item=article}
 		<article>
 			<a href="?post={$article.url_id}"><h1>{$article.title}</h1></a></br>
-			<h2> by {$article.author} - {$article.time}, {article.no_comments}</h2>
+			<h2> by {$article.author} - {$article.time}, {$article.no_comments}</h2>
 			<section class="articleContent">
 			{$article.content}
 			</section>

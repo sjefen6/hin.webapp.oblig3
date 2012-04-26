@@ -131,6 +131,14 @@ class user {
 		return $this -> id;
 	}
 	
+	public function getFirstname(){
+		return $this -> firstname;
+	}
+	
+	public function getLastname(){
+		return $this -> lastname;
+	}
+	
 	public function getUsername() {
 		return $this -> username;
 	}

@@ -93,7 +93,7 @@ if (isset($_GET["page"])) {
 } else if (isset($_GET["admin"]) && $user != null && $user -> getUserlevel() < 50) {
 	if ($_GET["admin"] == "addPage"){
 		if (isset($_POST["title"])){
-			if ($pages->addPage($_POST["title"],$_POST["id"],$user -> getId(),$_POST["desc"])){
+			if ($pages->addPage($_POST["title"],$_POST["url_id"],$user -> getId(),$_POST["content"])){
 				$smarty->assign("mode","added");
 			} else {
 				$smarty->assign("mode","notAdded");
@@ -103,7 +103,7 @@ if (isset($_GET["page"])) {
 		}
 	} else if ($_GET["admin"] == "addPost"){
 		if (isset($_POST["title"])){
-			if ($posts->addPost($_POST["title"], $_POST["id"],$user -> getId(),$_POST["desc"])){
+			if ($posts->addPost($_POST["title"], $_POST["url_id"],$user -> getId(),$_POST["content"])){
 				$smarty->assign("mode","added");
 			} else {
 				$smarty->assign("mode","notAdded");
@@ -127,7 +127,7 @@ if (isset($_GET["page"])) {
 		$smarty->assign("mode","newUser");
 	}
 } else if (isset($_GET["search"])) {
-	$temp = $posts->search($_GET["search"]);
+	$temp = $posts->search($_GET["search"], $comments, $users);
 	
 	if ($temp != false){
 		$smarty->assign("mode","bloglist");
@@ -144,7 +144,7 @@ if (isset($_GET["page"])) {
 		$to = $_GET["to"];
 	}
 	
-	$temp = $posts->getPosts($from, $to);
+	$temp = $posts->getPosts($from, $to, $comments, $users);
 	
 	if ($temp != false){
 		$smarty->assign("mode","bloglist");

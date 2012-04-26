@@ -21,24 +21,11 @@ class pageHandler{
 		$this -> pageArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'page');
 	}
 
-//	private function readFile(){
-//		$xml = simplexml_load_file($this -> filename);
-//
-//		foreach ($xml->page as $page) {
-//			$this->pageArray[] = new page(utf8_decode($page->id), utf8_decode($page->title), utf8_decode($page->time), utf8_decode($page->description));
-//		}
-//	}
-	
-	//TODO: fix?
 	public function getPage($id, $comments, $users) {
 		/* Hent ut post med $id og overf�r den til Smarty  */
 		foreach ($this->pageArray as $page) {
 			if ($id == $page->getUrlId()) {
-				$pageArray = array('title' => $page->getTitle(),
-				'time' => date("r", $page->getTime()),
-				'desc' => $page->getContent(),
-				'comments' => $comments->getCommentsForPage($page -> getId(), $users));
-				return $pageArray;
+				return $page->getSmarty($comments, $users);
 			}
 		}
 		return false;	
@@ -109,9 +96,20 @@ class page{
 		return $this->content;
 	}
 	
-	//TODO: fix
 	public function getMenuItem(){
 		return new menuItem("?page=" . $this->url_id, $this->title);
+	}
+	
+	public function getSmarty($comments, $users){
+		$user = $users->getUserById($this->author_id);
+		return array('id' => $this -> getId(),
+					'url_id' => $this -> url_id,
+					'title' => $this->title,
+					'time' => date("r", $this->time),
+					'content' => $this->content,
+					'author' => $user->getFirstname() . " " . $user->getLastname(),
+					'no_comments' => count($comments->getCommentsForPost($this -> getId(), $users)),
+					'comments' => $comments->getCommentsForPost($this -> getId(), $users));
 	}
 	
 	private function save($new = false){

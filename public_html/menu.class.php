@@ -43,7 +43,7 @@ class menuItem{
 	}
 
 	function getAsArray(){
-		return array("name" => $this->name, "url" => $this->url);
+		return array("name" => $this->name, "url_id" => $this->url);
 	}
 }
 
