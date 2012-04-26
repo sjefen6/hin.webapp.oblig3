@@ -181,6 +181,23 @@ class user {
 		
 		mail($to, $subject, $message, $headers);
 	}
+	
+	private function sendNewPassword(){
+		$to = $this->email;
+		$password = $this->random_gen(8);
+		$subject = "New password for kc.goldclone.no blogg";
+		
+		$message = "Your new password is: " . $password;
+		
+		$headers = 'From: noreply@'. $_SERVER['SERVER_NAME'] . "\r\n" .
+					'Reply-To: noreply@'. $_SERVER['SERVER_NAME'] . "\r\n" .
+					'X-Mailer: PHP/' . phpversion();
+					
+		mail($to,$subject,$message,$headers);
+		
+		$this->setPassword($password);
+		$this->save();
+	}
 
 	private function random_gen($length) {
 		// Source: http://deepakssn.blogspot.com/2006/06/php-random-string-generator-function.html
