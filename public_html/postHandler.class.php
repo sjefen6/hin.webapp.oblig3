@@ -161,7 +161,7 @@ class post{
 					'time' => date("r", $this->time),
 					'content' => $this->content,
 					'author' => $user->getFirstname() . " " . $user->getLastname(),
-					'no_comments' => count($comments->getCommentsForPost($this -> getId(), $users)),
+					'no_comments' => count($comments->getCommentsForPost($this -> id, $users)),
 					'comments' => $comments->getCommentsForPost($this -> getId(), $users));
 	}
 	
