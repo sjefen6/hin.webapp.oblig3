@@ -15,7 +15,7 @@
 	</header>
 	<nav>
 {foreach from=$menu item=i}
-		<a href="{$i.url}">{$i.name}</a>
+		<a href="{$i.url_id}">{$i.name}</a>
 {/foreach}
 	</nav>	
 	
@@ -34,7 +34,7 @@
 			<a href="?post={$article.url_id}"><h1>{$article.title}</h1></a></br>
 			<h2> by {$article.author} - {$article.time}, {article.no_comments}</h2>
 			<section class="articleContent">
-			{$article.desc}
+			{$article.content}
 			</section>
 		</article>
 		{/foreach}
@@ -45,7 +45,7 @@
 		<article>
 			<h1>{$post.title}</h1>
 			<section class="articleContent">
-			{$post.desc}
+			{$post.content}
 			</section>
 			{if ($userLevel <= 100)}
 			<section class="addComment">
@@ -72,7 +72,7 @@
 		<article>
 			<h1>{$page.title}</h1>
 			<section class="articleContent">
-			{$page.desc}
+			{$page.content}
 			</section>
 			{if ($userLevel <= 100)}
 			<section class="addComment">
@@ -101,8 +101,8 @@
 	<form action="?admin=addPost" method="post">
 		<label for="title">Title:</label>
 		<input type="text" name="title" required="required" /><br>
-		<label for="id">Id:</label>
-		<input type="text" name="id" required="required" /><br>
+		<label for="url_id">Url Id:</label>
+		<input type="text" name="url_id" required="required" /><br>
 		<label for="desc">Content:</label><br>
 		<textarea rows="30" cols="100" name="desc" required="required" ></textarea><br>
 		<input type="submit" value="Add Post" />
@@ -117,8 +117,8 @@
 	<form action="?admin=addPage" method="post">
 		<label for="title">Title:</label>
 		<input type="text" name="title" required="required" /><br>
-		<label for="id">Id:</label>
-		<input type="text" name="id" required="required" /><br>
+		<label for="url_id">Url Id:</label>
+		<input type="text" name="url_id" required="required" /><br>
 		<label for="desc">Content:</label><br>
 		<textarea rows="30" cols="100" name="desc" required="required" ></textarea><br>
 		<input type="submit" value="Add Page" />
