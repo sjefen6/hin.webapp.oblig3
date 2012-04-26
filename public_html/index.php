@@ -52,17 +52,13 @@ $smarty->assign('archive',$posts->getArchive());
 $users = new userHandler();
 $user = $users -> getCurrentUser();
 
-//var_dump($user);
-
-$admin = false;
 $failed = false;
 
 if ($user == "failed"){
 	$failed =  true;
 	$smarty->assign("userLevel", 200);
-} else if ($user != null && $user -> getUserlevel() < 50){
+} else if ($user != null && $user -> getUsermode() >= 1){
 	$smarty->assign("userLevel", $user -> getUserlevel());
-	$admin = true;
 } else {
 	$smarty->assign("userLevel", 200);
 }

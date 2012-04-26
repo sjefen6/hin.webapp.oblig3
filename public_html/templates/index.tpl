@@ -194,9 +194,10 @@
 	<div id="archive">
 	{foreach from=$archive item=archiveitem}
 		<div class="archiveItem">
-			<a href="?from="{$archiveitem.start}"&to="{$archiveitem.end}>{$archiveitem.title} ({$archiveitem.end - $archiveitem.start + 1})</a><br>
+			<a href="?from={$archiveitem.start}&to={$archiveitem.end}">{$archiveitem.title} ({$archiveitem.end - $archiveitem.start + 1})</a><br>
 		</div>
 	{/foreach}
+	</div>
 	<div id="login">
 		{if $failed}
 			<span>Loggon failed!</span>
