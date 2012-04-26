@@ -44,7 +44,7 @@
 	<div id="articles">
 		<article>
 			<h1>{$post.title}</h1>
-			<h2> by {$article.author} - {$article.time}, {$article.no_comments}</h2>
+			<h2> by {$post.author} - {$post.time}, {$post.no_comments}</h2>
 			<section class="articleContent">
 			{$post.content}
 			</section>
