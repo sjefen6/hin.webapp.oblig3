@@ -51,6 +51,22 @@ class postHandler{
 		}
 		return false;	
 	}
+	
+	public function search($needle){
+		/* Hent ut post med $id og overf�r den til Smarty  */
+		$returnArray = array();
+
+		foreach ($this->postArray as $post) {
+			if (stristr ($post -> getTitle(), $needle) || stristr ($post -> getContent(), $needle)){
+				$returnArray[] = array('id' => $post->getUrlId(),
+						'title' => $post->getTitle(),
+						'time' => date("r", $post->getTime()),
+						'desc' => $post->getContent());
+			}
+		}
+		// There are no more posts available
+		return $returnArray;
+	}
 
 	public function getPosts($from, $to){
 		/* Hent ut post med $id og overf�r den til Smarty  */
@@ -67,7 +83,7 @@ class postHandler{
 				;
 			} else if ($counter > $to) {
 				// We have passed $to
-				return $postArray;
+				return $returnArray;
 			} else {
 				$returnArray[] = array('id' => $post->getUrlId(),
 						'title' => $post->getTitle(),

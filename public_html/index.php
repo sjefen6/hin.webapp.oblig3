@@ -126,8 +126,26 @@ if (isset($_GET["page"])) {
 	} else {
 		$smarty->assign("mode","newUser");
 	}
+} else if (isset($_GET["search"])) {
+	$temp = $posts->search($_GET["search"]);
+	
+	if ($temp != false){
+		$smarty->assign("mode","bloglist");
+		$smarty->assign("articles", $temp);
+	} else {
+		header("Status: 404 Not Found");
+	}
 } else {
-	$temp = $posts->getPosts(0, 10);
+	$from = 0;
+	$to = 10;
+	
+	if(isset($_GET["from"]) && isset($_GET["to"])){
+		$from = $_GET["from"];
+		$to = $_GET["to"];
+	}
+	
+	$temp = $posts->getPosts($from, $to);
+	
 	if ($temp != false){
 		$smarty->assign("mode","bloglist");
 		$smarty->assign("articles", $temp);
