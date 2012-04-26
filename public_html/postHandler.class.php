@@ -53,7 +53,7 @@ class postHandler{
 	}
 
 	public function getPosts($from, $to){
-		/* Hent ut post med $id og overf¿r den til Smarty  */
+		/* Hent ut post med $id og overfï¿½r den til Smarty  */
 		
 		$returnArray = array();
 
@@ -83,6 +83,36 @@ class postHandler{
 	public function addPost($title, $url_id, $author_id, $content){
 		$this->postArray[] = new post($title, $url_id, time(), $author_id, $content);
 		return true;
+	}
+	
+	public function generateArchive(){
+		$tempArray = array();
+		$monthNumber = date(F, current($this->postArray)->getTime());
+		$year = date(Y, current($this->postArray)->getTime());
+		$start = $end = 0;
+		$current = 0;
+		$end;
+		
+		foreach($this->postArray as $posts){
+			if($end){
+				$start = $current;
+				$year = date(Y, next($posts)->getDate());
+				$monthNumber = (date(F, next($posts)->getDate()));
+			}		
+			$end=false;
+			
+			if($monthNumber = date(F ,$posts->getTime())){
+				if (date(F, next($posts)->getTime()) != $monthNumber || next($posts) == null){
+					$end = $current; 					
+					$end = true;
+				}			
+				$returnArray[] = array('title' => $month . " " . $year,
+						'start' => $post->getTitle(),
+						'end' => date("r", $post->getTime()));
+				$current++;
+			}
+		}
+		return $returnArray;
 	}
 }
 
