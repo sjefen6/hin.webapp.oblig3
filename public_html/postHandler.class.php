@@ -21,24 +21,11 @@ class postHandler{
 		$this -> postArray = $stmt -> fetchALL(PDO::FETCH_CLASS, 'post');
 	}
 
-//	private function readFile(){
-//		$xml = simplexml_load_file($this->filename);
-//
-//		foreach ($xml->post as $post) {
-//			$this->postArray[] = new post(utf8_decode($post->id), utf8_decode($post->title), utf8_decode($post->time), utf8_decode($post->description));
-//		}
-//	}
-
-	//TODO: fix
 	public function getPost($id, $comments, $users){
 		/* Hent ut post med $id og overf�r den til Smarty  */
 		foreach ($this->postArray as $post) {
 			if ($id == $post->getUrlId()) {
-				$postArray = array('title' => $post->getTitle(),
-					'time' => date("r", $post->getTime()),
-					'desc' => $post->getContent(),
-				'comments' => $comments->getCommentsForPost($post -> getId(), $users));
-				return $postArray;
+				return $post->getSmarty($comments, $users);;
 			}
 		}
 		return false;
@@ -52,23 +39,20 @@ class postHandler{
 		return false;	
 	}
 	
-	public function search($needle){
+	public function search($needle, $comments, $users){
 		/* Hent ut post med $id og overf�r den til Smarty  */
 		$returnArray = array();
 
 		foreach ($this->postArray as $post) {
 			if (stristr ($post -> getTitle(), $needle) || stristr ($post -> getContent(), $needle)){
-				$returnArray[] = array('id' => $post->getUrlId(),
-						'title' => $post->getTitle(),
-						'time' => date("r", $post->getTime()),
-						'desc' => $post->getContent());
+				$returnArray[] = $post->getSmarty($comments, $users);
 			}
 		}
 		// There are no more posts available
 		return $returnArray;
 	}
 
-	public function getPosts($from, $to){
+	public function getPosts($from, $to, $comments, $users){
 		/* Hent ut post med $id og overf�r den til Smarty  */
 		
 		$returnArray = array();
@@ -85,10 +69,7 @@ class postHandler{
 				// We have passed $to
 				return $returnArray;
 			} else {
-				$returnArray[] = array('id' => $post->getUrlId(),
-						'title' => $post->getTitle(),
-						'time' => date("r", $post->getTime()),
-						'desc' => $post->getContent());
+				$returnArray[] = $post->getSmarty($comments, $users);
 			}
 			$counter++;
 		}
@@ -170,6 +151,17 @@ class post{
 
 	public function getContent(){
 		return $this->content;
+	}
+	
+	public function getSmarty($comments, $users){
+		$user = $users->getUserById($this->author_id);
+		return array('id' => $this -> getId(),
+					'url_id' => $this -> url_id,
+					'title' => $this->title,
+					'time' => date("r", $this->time),
+					'content' => $this->content,
+					'author' => $user->getFirstname() . " " . $user->getLastname(),
+					'comments' => $comments->getCommentsForPost($this -> getId(), $users));
 	}
 	
 	private function save($new = false){
