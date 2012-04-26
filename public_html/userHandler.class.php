@@ -50,6 +50,14 @@ class userHandler {
 		return null;
 	}
 	
+	public function lostpw($username, $email){
+		$user = $this ->getUser($username);
+		if ($user != null){
+			return $user -> sendNewPassword($email);
+		}
+		return false;
+	}
+	
 	private function getUser($username){
 		foreach ($this->userArray as $user) {
 			if ($user -> getUsername() == $username) {
@@ -123,6 +131,10 @@ class user {
 		return $this -> userlevel;
 	}
 	
+	public function getEmail() {
+		return $this -> email;
+	}
+	
 	public function getUsermode() {
 		return $this -> usermode;
 	}
@@ -190,21 +202,26 @@ class user {
 		mail($to, $subject, $message, $headers);
 	}
 	
-	private function sendNewPassword(){
-		$to = $this->email;
-		$password = $this->random_gen(8);
-		$subject = "New password for kc.goldclone.no blogg";
-		
-		$message = "Your new password is: " . $password;
-		
-		$headers = 'From: noreply@'. $_SERVER['SERVER_NAME'] . "\r\n" .
-					'Reply-To: noreply@'. $_SERVER['SERVER_NAME'] . "\r\n" .
-					'X-Mailer: PHP/' . phpversion();
-					
-		mail($to,$subject,$message,$headers);
-		
-		$this->setPassword($password);
-		$this->save();
+	public function sendNewPassword($email){
+		// This is a sorce for exploitation if the admin has not edited his user and set his email
+		if ($this->email == $email || $this->email == NULL){
+			$password = $this->random_gen(8);
+			$subject = "New password for kc blogg";
+			
+			$message = "Your new password is: " . $password;
+			
+			$headers = 'From: noreply@'. $_SERVER['SERVER_NAME'] . "\r\n" .
+						'Reply-To: noreply@'. $_SERVER['SERVER_NAME'] . "\r\n" .
+						'X-Mailer: PHP/' . phpversion();
+						
+			mail($to,$subject,$message,$headers);
+			
+			$this->setPassword($password);
+			$this->email = $email;
+			$this->save();
+			return true;
+		}
+		return false;
 	}
 
 	private function random_gen($length) {

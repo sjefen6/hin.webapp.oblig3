@@ -135,6 +135,18 @@ if (isset($_GET["page"])) {
 	} else {
 		header("Status: 404 Not Found");
 	}
+} else if (@$_GET["login"] == "lostpw") {
+	$users->lostpw($_POST["username"],$_POST["email"]);
+	
+	if (isset($_POST["username"]) && isset($_POST["email"])){
+		if ($users->lostpw($_POST["username"],$_POST["email"])) {
+			$smarty->assign("mode","addedUser");
+		} else {
+			header("Status: 404 Not Found");
+		}
+	} else {
+		$smarty->assign("mode","lostpw");
+	}
 } else {
 	$from = 0;
 	$to = 10;
