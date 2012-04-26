@@ -191,6 +191,13 @@
 {/if}
 <!-- Right bar -->
 <div id="rightbar">
+	<div id="searcher">
+		<form action="" method="get">
+			<label for="search>Search site: </label>
+			<input type="text" name="search" /><br>
+			<input type="submit" value="Search" />
+		</form>
+	</div>
 	<div id="archive">
 	{foreach from=$archive item=archiveitem}
 		<div class="archiveItem">
