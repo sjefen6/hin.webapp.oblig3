@@ -26,6 +26,13 @@ class userHandler {
 			if ($_GET["login"] == "out"){
 				$this -> logout();
 			}
+		} else if (isset($_GET["user"]) && isset($_GET["vkey"])){
+			$user = $this -> getUser($_GET["user"]);
+			if ($user != null && $user -> getUsermode() >= -1 && $user -> verifyValidationkey($_GET["vkey"])){
+				return $user;
+			} else {
+				return "failed";
+			}
 		} else if (isset($_POST["username"])){
 			$user = $this -> getUser($_POST["username"]);
 			if ($user != null && $user -> getUsermode() <= 1 && $user -> verifyPasword($_POST["password"])){
@@ -64,8 +71,8 @@ class userHandler {
 	public function addUser($username, $email, $firstname, $lastname, $password, $userlevel, $usermode) {
 			if ($_POST["confirmPassword"] === $password){
 				if ($this -> getUser($_POST["userName"]) == NULL){
-					$this -> addUser($username, $email, $firstname, $lastname, $password, $userlevel, $usermode);
-					return $this -> getUser($_POST["userName"]);
+					$this -> userArray[] = new user($username, $email, $firstname, $lastname, $password, $userlevel, $usermode);
+					return true;
 				}
 			}
 		return false;
@@ -105,6 +112,8 @@ class user {
 			$this -> setPassword($password);
 			$this -> userlevel = $userlevel;
 			$this -> usermode = $usermode;
+			
+			$this->sendRegisterValidation();
 
 			$this -> save(true);
 		}

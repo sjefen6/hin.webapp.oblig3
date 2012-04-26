@@ -119,10 +119,10 @@ if (isset($_GET["page"])) {
 	}
 } else if (@$_GET["login"] == "register"){
 	if (isset($_POST["userName"])){
-		if ($users->addUser($_POST["userName"],$_POST["password"],
-				$_POST["confirmPassword"],$_POST["firstName"],
-				$_POST["lastName"],$_POST["email"], 100, -1)){
-			$smarty->assign("mode","userAdded");
+		if ($users->addUser($_POST["userName"],$_POST["email"],
+			$_POST["firstName"],$_POST["lastName"],
+			$_POST["password"], 100, -1)){
+			$smarty->assign("mode","addedUser");
 		} else {
 			$smarty->assign("mode","notAdded");
 		}
