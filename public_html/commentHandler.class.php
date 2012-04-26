@@ -4,7 +4,7 @@ class commentHandler{
 
 	/** Se userHAndler.class.php*/
 	function __construct() {
-		$sql = "SELECT * FROM " . settings::getDbPrefix(). "comments";
+		$sql = "SELECT * FROM " . settings::getDbPrefix(). "comments ORDER BY time DESC";
 		
 		/*** fetch into an PDOStatement object ***/
 		$stmt = settings::getDatabase() -> query($sql);
@@ -49,22 +49,6 @@ class commentHandler{
 	/** Legger til en ny kommentar. */
 	public function addComment($postid, $page_id, $desc, $a_id){
 		$this->commentArray[] = new comment($postid, $page_id, time(), $desc, $a_id);
-	}
-
-	/** Sorterer kommentarene i arrayet etter tid. */
-	public function sortComments(){
-		usort($this -> commentArray, array($this, 'sortByTime'));
-	}
-	
-	/** Hjelpefunksjon for sortering. */
-	private function sortByTime($a, $b) {
-		if ($a->getTime() == $b->getTime()) {
-			return 0;
-		} else if ($a->getTime() > $b->getTime()) {
-			return -1;
-		} else {
-			return 1;
-		}
 	}
 }
 

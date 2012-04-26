@@ -108,8 +108,8 @@ class page{
 					'time' => date("r", $this->time),
 					'content' => $this->content,
 					'author' => $user->getFirstname() . " " . $user->getLastname(),
-					'no_comments' => count($comments->getCommentsForPost($this -> getId(), $users)),
-					'comments' => $comments->getCommentsForPost($this -> getId(), $users));
+					'no_comments' => count($comments->getCommentsForPage($this -> getId(), $users)),
+					'comments' => $comments->getCommentsForPage($this -> getId(), $users));
 	}
 	
 	private function save($new = false){
