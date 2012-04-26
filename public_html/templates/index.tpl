@@ -146,7 +146,7 @@
 			<label for="confirmPassword">Confirm password:</label>
 			<input type="password" name="confirmPassword" required="required" /><br>
 			<br>
-			<input type="submit" value="Register" />(not yet implemented)
+			<input type="submit" value="Register" />
 		</form>
 		
 		<img src="http://media.comicvine.com/uploads/5/52044/1476978-1280118961161.jpg" alt="Register comic" width="324" height="250" />
