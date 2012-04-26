@@ -44,6 +44,7 @@ $comments = new commentHandler();
 $menu = $pages->addToMenu($menu);
 
 $smarty->assign('menu',$menu->getMenuArray());
+$smarty->assign('archive',$posts->getArchive());
 
 /*
  * Login subutine

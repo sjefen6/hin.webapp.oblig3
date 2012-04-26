@@ -85,32 +85,24 @@ class postHandler{
 		return true;
 	}
 	
-	public function generateArchive(){
-		$tempArray = array();
-		$monthNumber = date(F, current($this->postArray)->getTime());
+	public function getArchive(){
+		$returnArray = array();
+		$month = date(F, current($this->postArray)->getTime());
 		$year = date(Y, current($this->postArray)->getTime());
-		$start = $end = 0;
-		$current = 0;
-		$end;
+		$start = $end = $counter = 0;
 		
-		foreach($this->postArray as $posts){
-			if($end){
-				$start = $current;
-				$year = date(Y, next($posts)->getDate());
-				$monthNumber = (date(F, next($posts)->getDate()));
-			}		
-			$end=false;
-			
-			if($monthNumber = date(F ,$posts->getTime())){
-				if (date(F, next($posts)->getTime()) != $monthNumber || next($posts) == null){
-					$end = $current; 					
-					$end = true;
-				}			
+		foreach($this->postArray as $post){
+			if(date(F, $post->getTime()) == $month && date(Y, $post->getTime()) == $year){
+				$end = $counter;
+			} else {
 				$returnArray[] = array('title' => $month . " " . $year,
-						'start' => $post->getTitle(),
-						'end' => date("r", $post->getTime()));
-				$current++;
+						'start' => $start,
+						'end' => $end);
+				$month = date(F, $post->getTime());
+				$year = date(Y, $post->getTime());
+				$start = $end = $counter;
 			}
+			$counter++;
 		}
 		return $returnArray;
 	}
