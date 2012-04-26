@@ -26,7 +26,7 @@
 	</nav>
 {/if}
 	
-<!-- Standard vising av 10 øverste poster -->	
+<!-- Standard vising av 10 poster -->	
 {if $mode eq 'bloglist'}
 	<div id="articles">
 		{foreach from=$articles item=article}
